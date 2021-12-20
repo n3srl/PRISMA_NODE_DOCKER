@@ -14,20 +14,22 @@ services:
       - type: volume
         source: vpn-conf
         target: /config/
+    ports:
+      - "8080:80"
+      - "2222:2222"
   ssh-server:
     image: lorenz10/openssh-server
     container_name: prisma-ssh
     restart: unless-stopped
-    network_mode: service:vpn-client # use the network stack of the other container
+    network_mode: service:vpn-client
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
-      - PASSWORD_ACCESS=true
       - SUDO_ACCESS=true
       - USER_NAME=prisma
       - PASSWORD_ACCESS=false
-      #- USER_PASSWORD= passwordless sudo access
+      #- USER_PASSWORD= -> passwordless sudo access
       - PUBLIC_KEY_FILE=/keys/rsa.pub
     volumes:
       - type: volume
@@ -45,24 +47,30 @@ services:
       - type: volume
         source: vpn-conf
         target: /etc/openvpn
-      - type: volume
-        source: ssh-key
-        target: /keys
     depends_on:
      - vpn-client
-  ntp-client:
-    image: lorenz10/ntp-client
-    container_name: prisma-ntp
+  orma:
+    image: lorenz10/orma-webmin
+    container_name: prisma-orma
     restart: unless-stopped
-    cap_add:
-      - SYS_TIME
+    network_mode: service:vpn-client
+    volumes:
+      - type: bind
+        source: /todo
+        target: /var/www/html
+      - type: bind
+        source: /todo
+        target: /keys/chiave
+      - type: bind
+        source: /todo
+        target: /keys/chiave.pub
     depends_on:
      - ssh-server
   freeture:
-    image: lorenz10/freeture
+    image: freeture
     container_name: freeture
     restart: unless-stopped
-    network_mode: "host" # use the network of the host
+    network_mode: "host"
     volumes:
       - type: volume
         source: freeture-conf
@@ -71,8 +79,6 @@ services:
         source: freeture-data
         target: /freeture/
     command: ["-m","3"]
-    depends_on:
-     - ntp-client
  
 volumes:
   ssh-home:
@@ -83,6 +89,12 @@ volumes:
     external: true
   vpn-conf:
     external: true
-  ssh-key:
-    external: true
 
+#  ntp-client:
+#    image: lorenz10/ntp-client
+#    container_name: prisma-ntp
+#    restart: unless-stopped
+#    cap_add:
+#      - SYS_TIME
+#    depends_on:
+#     - ssh-server
