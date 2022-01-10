@@ -1,2 +1,3 @@
 *.ovpn
 *.txt
+/SETUP/files/*

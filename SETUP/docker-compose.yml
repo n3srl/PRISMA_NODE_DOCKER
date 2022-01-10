@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   vpn-client:
-    image: lorenz10/openvpn-client
+    image: n3srl/openvpn-client
     container_name: prisma-vpn
     restart: unless-stopped
     cap_add:
@@ -16,9 +16,9 @@ services:
         target: /config/
     ports:
       - "8080:80"
-      - "2222:2222"
+      - "2222:22"
   ssh-server:
-    image: lorenz10/openssh-server
+    image: n3srl/openssh-server
     container_name: prisma-ssh
     restart: unless-stopped
     network_mode: service:vpn-client
@@ -29,45 +29,42 @@ services:
       - SUDO_ACCESS=true
       - USER_NAME=prisma
       - PASSWORD_ACCESS=false
-      #- USER_PASSWORD= -> passwordless sudo access
+      #- USER_PASSWORD= passwordless sudo access
       - PUBLIC_KEY_FILE=/keys/rsa.pub
     volumes:
-      - type: volume
-        source: ssh-home
-        target: /home/prisma/
       - type: volume
         source: freeture-conf
         target: /usr/local/share/freeture/
       - type: volume
         source: freeture-data
         target: /prismadata/
-      - type: bind
-        source: /var/run/docker.sock
-        target: /var/run/docker.sock 
       - type: volume
         source: vpn-conf
         target: /etc/openvpn
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock 
     depends_on:
      - vpn-client
   orma:
-    image: lorenz10/orma-webmin
+    image: n3srl/orma-webmin
     container_name: prisma-orma
     restart: unless-stopped
     network_mode: service:vpn-client
     volumes:
-      - type: bind
-        source: /todo
+      - type: volume
+        source: freeture-conf
+        target: /usr/local/share/freeture/
+      - type: volume
+        source: orma-src
         target: /var/www/html
-      - type: bind
-        source: /todo
-        target: /keys/chiave
-      - type: bind
-        source: /todo
-        target: /keys/chiave.pub
+      - type: volume
+        source: orma-keys
+        target: /keys/
     depends_on:
      - ssh-server
   freeture:
-    image: freeture
+    image: n3srl/freeture
     container_name: freeture
     restart: unless-stopped
     network_mode: "host"
@@ -79,15 +76,19 @@ services:
         source: freeture-data
         target: /freeture/
     command: ["-m","3"]
+    depends_on:
+     - orma
  
 volumes:
-  ssh-home:
-    external: true
   freeture-conf:
     external: true
   freeture-data:
     external: true
   vpn-conf:
+    external: true
+  orma-src:
+    external: true
+  orma-keys:
     external: true
 
 #  ntp-client:
