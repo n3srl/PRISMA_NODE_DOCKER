@@ -4,9 +4,9 @@
 
 # Manuali
 
-* [Utente finale: installazione Prisma Docker](https://github.com/lorenz10/iso-prisma/tree/main/SETUP#readme) 
-* [Amministratore Prisma: configurazione della Camera](https://github.com/lorenz10/iso-prisma/tree/main/SETUP#readme)
-* [Documentazione interna](https://github.com/lorenz10/iso-prisma#readme)
+* [Utente finale: installazione Prisma Docker](https://github.com/n3srl/PRISMA_NODE_DOCKER/tree/main/SETUP#readme) 
+* [Amministratore Prisma: configurazione della Camera](https://github.com/n3srl/PRISMA_NODE_DOCKER/tree/main/SETUP#readme)
+* [Documentazione interna](https://github.com/n3srl/PRISMA_NODE_DOCKER#readme)
 
 ## Documentazione interna
 
