@@ -16,9 +16,7 @@ wget https://github.com/n3srl/PRISMA_NODE_DOCKER/releases/download/1.4.0/PrismaD
 ```
 5. Decomprimere il file `PrismaDocker.zip` scaricabile dall'ultima [release](https://github.com/n3srl/PRISMA_NODE_DOCKER/releases) disponibile.
 
-#### 2. Aggiunta files mancanti (COME FARE ?)
-
-
+#### 2. Aggiunta files di configurazione
 
 #### 3. Controllo visibilità della Camera
 
