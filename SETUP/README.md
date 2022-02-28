@@ -8,8 +8,12 @@ Questa guida è destinata a coloro che vogliono configurare il Client Prisma all
 Sulla macchina che si vuole collegare alla Camera è necessario:
 
 1. Avere installato: [docker](https://docs.docker.com/engine/install/) e [docker-compose](https://docs.docker.com/compose/install/).
-
-2. Decomprimere il file `PrismaDocker.zip` scaricabile dall'ultima [release](https://github.com/n3srl/PRISMA_NODE_DOCKER/releases) disponibile.
+2. Avere installato wget
+3. Scaricare il file `PrismaDocker.zip` 
+```sh 
+wget https://github.com/n3srl/PRISMA_NODE_DOCKER/releases
+```
+5. Decomprimere il file `PrismaDocker.zip` scaricabile dall'ultima [release](https://github.com/n3srl/PRISMA_NODE_DOCKER/releases) disponibile.
 
 #### 2. Aggiunta files mancanti (COME FARE ?)
 
