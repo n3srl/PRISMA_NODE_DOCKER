@@ -9,7 +9,8 @@ Sulla macchina che si vuole collegare alla Camera è necessario:
 
 1. Avere installato: [docker](https://docs.docker.com/engine/install/) e [docker-compose](https://docs.docker.com/compose/install/).
 2. Avere installato wget
-3. Scaricare il file `PrismaDocker.zip` 
+3. Avere installato unzip
+4. Scaricare il file `PrismaDocker.zip` 
 ```sh 
 wget https://github.com/n3srl/PRISMA_NODE_DOCKER/releases/download/1.4.0/PrismaDocker.zip
 ```
