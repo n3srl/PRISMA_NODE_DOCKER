@@ -30,7 +30,9 @@ il risultato dovrebbe essere simile al seguente (una volta terminato il download
 >[1]    VIDEO FILES \
 >[2]    FRAMES DIRECTORY \
 
-#### 4. Avvio dei Container (root)
+#### 4. Avvio dei Container
+
+Assicurarsi di avere i privilegi amministrativi (root)
 
 Posizionarsi all'interno della cartella `SETUP`.
 
