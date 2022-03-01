@@ -2,7 +2,7 @@
 
 BASE=$(pwd)
 FILES="${BASE}/files"
-VPN_CONF="${FILES}/client.ovpn"
+VPN_CONF="${FILES}/prisma-node-vpn-guest.ovpn"
 ELLE_ROOT="${FILES}/framework-base-php-elle"
 SSH_KEY="${FILES}/chiave"
 ELLE_PASS="${FILES}/passwd.txt"
