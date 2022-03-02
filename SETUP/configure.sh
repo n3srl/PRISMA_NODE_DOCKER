@@ -22,7 +22,7 @@ if [ -f "${VPN_CONF}" ]; then
 
                 echo "Filling volumes..."
                 docker run --rm -i -v ${FILES}/:/src -v vpn-conf:/dst \
-                alpine cp -v /src/client.ovpn /dst
+                alpine cp -v /src/prisma-node-vpn-guest.ovpn /dst/client.ovpn
                 docker run --rm -i -v ${FILES}/framework-base-php-elle:/src -v orma-src:/dst \
                 alpine cp -r /src/. /dst
                 docker run --rm -i -v ${FILES}/:/src -v orma-keys:/dst \
