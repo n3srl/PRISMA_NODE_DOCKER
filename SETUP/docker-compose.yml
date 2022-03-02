@@ -1,56 +1,10 @@
 version: '3.7'
 services:
-  vpn-client:
-    image: n3srl/openvpn-client
-    container_name: prisma-vpn
-    restart: unless-stopped
-    cap_add:
-      - NET_ADMIN
-    sysctls:
-      - net.ipv4.ip_forward=1
-    devices:
-      - /dev/net/tun
-    volumes:
-      - type: volume
-        source: vpn-conf
-        target: /config/
-    ports:
-      - "8080:80"
-      - "2222:22"
-  ssh-server:
-    image: n3srl/openssh-server
-    container_name: prisma-ssh
-    restart: unless-stopped
-    network_mode: service:vpn-client
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=UTC
-      - SUDO_ACCESS=true
-      - USER_NAME=prisma
-      - PASSWORD_ACCESS=false
-      #- USER_PASSWORD= passwordless sudo access
-      - PUBLIC_KEY_FILE=/keys/rsa.pub
-    volumes:
-      - type: volume
-        source: freeture-conf
-        target: /usr/local/share/freeture/
-      - type: volume
-        source: freeture-data
-        target: /prismadata/
-      - type: volume
-        source: vpn-conf
-        target: /etc/openvpn
-      - type: bind
-        source: /var/run/docker.sock
-        target: /var/run/docker.sock 
-    depends_on:
-     - vpn-client
   orma:
     image: n3srl/orma-webmin
     container_name: prisma-orma
     restart: unless-stopped
-    network_mode: service:vpn-client
+    network_mode: "host"
     volumes:
       - type: volume
         source: freeture-conf
@@ -61,8 +15,6 @@ services:
       - type: volume
         source: orma-keys
         target: /keys/
-    depends_on:
-     - ssh-server
   freeture:
     image: n3srl/freeture
     container_name: freeture
@@ -84,18 +36,7 @@ volumes:
     external: true
   freeture-data:
     external: true
-  vpn-conf:
-    external: true
   orma-src:
     external: true
   orma-keys:
     external: true
-
-#  ntp-client:
-#    image: lorenz10/ntp-client
-#    container_name: prisma-ntp
-#    restart: unless-stopped
-#    cap_add:
-#      - SYS_TIME
-#    depends_on:
-#     - ssh-server

@@ -1,0 +1,37 @@
+---
+- name: Install Freeture
+  hosts: guest_nodes
+  remote_user: root
+  tasks:
+    - name: Ensure apache is at the latest version
+
+- name: Install OpenVPN client
+  hosts: guest_nodes
+  remote_user: root
+
+
+- name: Install Orma-WebMin
+  hosts: guest_nodes
+  remote_user: root
+
+
+- name: Install node_exporter
+  hosts: guest_nodes
+  remote_user: root
+
+
+- name: Confiugure SSH Server
+  hosts: guest_nodes
+
+
+- name: Configure OpenVPN client
+  hosts: guest_nodes
+
+
+- name: Configure Orma-WebMin
+  hosts: guest_nodes
+
+
+- name: Update Orma-WebMin
+  hosts: guest_nodes
+
