@@ -10,11 +10,6 @@
 
 ## Documentazione interna
 
-#### Creazione VPN Prisma Guest
-
-Per crearlo è stata usate la seguente Immagine Docker: 
-[kylemanna/docker-openvpn](https://github.com/kylemanna/docker-openvpn), vedi la cartella `vpn-server` per maggiori info a riguardo.
-
 #### Preparazione OS per NUC
 
 Sul NUC è stato installato Debian 11 e sono state effettuate le seguenti modifiche:
@@ -31,11 +26,9 @@ Il docker-compose file configura Container e Volume nel seguente modo:
 dove:
 * **freeture-conf** contiene il file di configurazione di Freeture: *configuration.cfg*.
 * **freeture-data** contiene le captures di Freeture.
-* **vpn-conf** contiene il file *client.ovpn* che viene utilizzato per la configurazione della VPN.
 * **orma-src** contiene i sorgenti di Orma.
 * **orma-keys** contiene i file *chiave* e *chiave.pub* che servono al container di Orma ad accedere al container SSH, e il file *passwd.txt* contenente il database di utenti che possono accede a Orma.
 
-Il Container **prisma-ssh** è accessibile tramite la porta 22 da VPN o la 2222 da localhost.
 Il Container **prisma-orma** è accessibile tramite la porta 80 da VPN o la 8080 da localhost.
 
 #### Clonazione del disco
