@@ -97,16 +97,3 @@ Riavviare Freeture:
 ```sh
 ./prisma.sh ft --restart 
 ```
-
-#### 3. Configurazione VPN
-
-Per configurare la VPN, caricare il nuovo file di configurazione di tipo *.ovpn* nella cartella `/home/prisma` tramite il comando:
-```sh
-scp -i <KEY> /path/to/your/file.ovpn prisma@<IP_NODO>:/etc/openvpn
-```
-il file NON deve chiamarsi `client.ovpn`!
-Successivamente si dovrà lanciare lo script `vpn.sh`, che eseguirà lo switch alla nuova rete VPN:
-```sh
-./prisma.sh vpn --switch <IP>
-```
-dove `\<IP\>` è l'indirizzo da pingare per verificare il corretto accesso alla VPN (attualmente: Prisma Guest 192.168.255.1, Prisma Network: 10.8.0.1).
