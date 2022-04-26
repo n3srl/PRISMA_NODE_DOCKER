@@ -97,3 +97,15 @@ Riavviare Freeture:
 ```sh
 ./prisma.sh ft --restart 
 ```
+
+Configurazione VPN
+Per configurare la VPN, caricare il nuovo file di configurazione di tipo .ovpn nella cartella /home/prisma tramite il comando:
+
+scp -i <KEY> /path/to/your/<STATION CODE>.ovpn prisma@<IP_NODO>:/home/prisma
+  
+#CONFIGURAZIONE OPENVPN
+cp /home/prisma/<STATION CODE>.ovpn /etc/openvpn/client.conf
+service openvpn restart
+service ssh restart
+exit
+ 
