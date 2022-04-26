@@ -27,8 +27,21 @@ ELLE_PASS="${FILES}/passwd.txt"
                 docker-compose up -d
 
                 echo "Setting permissions..."
-                docker exec -it prisma-orma chmod -R 777 /keys
-
+                docker exec -it prisma-orma chmod -R 777 /keyskkkk::::
+                docker exec -it prisma-orma chown -R www-data:www-data /var/www/html/tmp-media
+                docker exec -it prisma-orma chmod -R 770 /var/www/html/tmp-media
+                
+                echo "Installing packages..."
+                docker exec -it prisma-orma apt-get update
+                docker exec -it prisma-orma apt-get install fitspng
+                docker exec -it prisma-orma apt-get update
+   		docker exec -it prisma-orma apt-get install zip
+   		docker exec -it prisma-orma apt-get update
+   		docker exec -it prisma-orma apt-get install ffmpeg
+   		docker exec -it prisma-orma apt-get update
+   		docker exec -it prisma-orma apt-get install imagemagick
+   		
+                
                 echo "Ended"
 
             else
