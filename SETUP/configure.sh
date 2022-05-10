@@ -10,12 +10,15 @@ ELLE_PASS="${FILES}/passwd.txt"
     if [ -d "${ELLE_ROOT}" ]; then
         if [[ -f "${SSH_KEY}" && -f "${SSH_KEY}.pub" ]]; then
             if [ -f "${ELLE_PASS}" ]; then
-                
+                	
                 echo "Creating volumes..."
                 docker volume create freeture-data
                 docker volume create freeture-conf
                 docker volume create orma-src
                 docker volume create orma-keys
+                
+                echo "Fetching source code from git..."
+                git clone https://github.com/n3srl/PRISMA_NODE_WEBMIN.git ${FILES}/framework-base-php-elle
 
                 echo "Filling volumes..."
                 docker run --rm -i -v ${FILES}/framework-base-php-elle:/src -v orma-src:/dst \
@@ -30,7 +33,10 @@ ELLE_PASS="${FILES}/passwd.txt"
                 docker exec -it prisma-orma chmod -R 777 /keyskkkk::::
                 docker exec -it prisma-orma chown -R www-data:www-data /var/www/html/tmp-media
                 docker exec -it prisma-orma chmod -R 770 /var/www/html/tmp-media
-                
+                docker exec -it prisma-orma chown -R www-data:www-data /var/www/html/info-media
+                docker exec -it prisma-orma chmod -R 770 /var/www/html/info-media
+      		
+      		: '  
                 echo "Installing packages..."
                 docker exec -it prisma-orma apt-get update
                 docker exec -it prisma-orma apt-get install fitspng
@@ -40,7 +46,7 @@ ELLE_PASS="${FILES}/passwd.txt"
    		docker exec -it prisma-orma apt-get install ffmpeg
    		docker exec -it prisma-orma apt-get update
    		docker exec -it prisma-orma apt-get install imagemagick
-   		
+   		'
                 
                 echo "Ended"
 
