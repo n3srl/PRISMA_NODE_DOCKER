@@ -7,7 +7,7 @@ SSH_KEY="${FILES}/chiave"
 ELLE_PASS="${FILES}/passwd.txt"
 
 #check all files present
-    if [ -d "${ELLE_ROOT}" ]; then
+    #if [ -d "${ELLE_ROOT}" ]; then
         if [[ -f "${SSH_KEY}" && -f "${SSH_KEY}.pub" ]]; then
             if [ -f "${ELLE_PASS}" ]; then
                 	
@@ -18,7 +18,7 @@ ELLE_PASS="${FILES}/passwd.txt"
                 docker volume create orma-keys
                 
                 echo "Fetching source code from git..."
-                git clone https://github.com/n3srl/PRISMA_NODE_WEBMIN.git ${FILES}/framework-base-php-elle
+                git clone https://github.com/n3srl/PRISMA_NODE_WEBMIN.git ${FILES}/framework-base-php-elle --branch feature/elisa_pioldi
 
                 echo "Filling volumes..."
                 docker run --rm -i -v ${FILES}/framework-base-php-elle:/src -v orma-src:/dst \
@@ -30,15 +30,14 @@ ELLE_PASS="${FILES}/passwd.txt"
                 docker-compose up -d
 
                 echo "Setting permissions..."
-                docker exec -it prisma-orma chmod -R 777 /keyskkkk::::
                 docker exec -it prisma-orma chown -R www-data:www-data /var/www/html/tmp-media
                 docker exec -it prisma-orma chmod -R 770 /var/www/html/tmp-media
                 docker exec -it prisma-orma chown -R www-data:www-data /var/www/html/info-media
                 docker exec -it prisma-orma chmod -R 770 /var/www/html/info-media
-                chown -R prisma:prisma /etc/openvpn
-                chmod -R 770 /etc/openvpn
-                chown -R prisma:prisma /etc/prometheus
-                chmod -R 770 /etc/prometheus
+                chown -R root:www-data /etc/openvpn
+                chmod -R 775 /etc/openvpn
+                chown -R root:www-data /etc/prometheus
+                chmod -R 775 /etc/prometheus
                 
                 echo "Ended"
 
@@ -48,8 +47,8 @@ ELLE_PASS="${FILES}/passwd.txt"
         else
             echo "Missing key files"
         fi
-    else
-        echo "Missing ${ELLE_ROOT} folder"
-    fi
+    #else
+     #   echo "Missing ${ELLE_ROOT} folder"
+    #fi
 
 #docker-compose stop; docker-compose rm -f; docker volume rm freeture-data freeture-conf vpn-conf orma-src orma-keys
