@@ -35,18 +35,10 @@ ELLE_PASS="${FILES}/passwd.txt"
                 docker exec -it prisma-orma chmod -R 770 /var/www/html/tmp-media
                 docker exec -it prisma-orma chown -R www-data:www-data /var/www/html/info-media
                 docker exec -it prisma-orma chmod -R 770 /var/www/html/info-media
-      		
-      		: '  
-                echo "Installing packages..."
-                docker exec -it prisma-orma apt-get update
-                docker exec -it prisma-orma apt-get install fitspng
-                docker exec -it prisma-orma apt-get update
-   		docker exec -it prisma-orma apt-get install zip
-   		docker exec -it prisma-orma apt-get update
-   		docker exec -it prisma-orma apt-get install ffmpeg
-   		docker exec -it prisma-orma apt-get update
-   		docker exec -it prisma-orma apt-get install imagemagick
-   		'
+                chown -R prisma:prisma /etc/openvpn
+                chmod -R 770 /etc/openvpn
+                chown -R prisma:prisma /etc/prometheus
+                chmod -R 770 /etc/prometheus
                 
                 echo "Ended"
 

@@ -15,6 +15,10 @@ RUN a2enmod rewrite \
 # add ssh2 library
 RUN apt-get install --no-install-recommends -y libssh2-1-dev \
     && pecl install ssh2-1.3.1 \
-    && docker-php-ext-enable ssh2
+    && docker-php-ext-enable ssh2 \
+    && apt-get install fitspng \
+    && apt-get install zip \
+    && apt-get install ffmpeg \
+    && apt-get install imagemagick
 
 
