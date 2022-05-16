@@ -18,12 +18,6 @@ services:
       - type: volume
         source: freeture-data
         target: /freeture/
-      - type: bind
-        source: /etc/openvpn
-        target: /usr/local/share/openvpn
-      - type: bind
-        source: /etc/prometheus
-        target: /usr/local/share/prometheus
   freeture:
     image: n3srl/freeture
     container_name: freeture
