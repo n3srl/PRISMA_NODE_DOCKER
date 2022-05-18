@@ -35,6 +35,8 @@ if [[ -f "${SSH_KEY}" && -f "${SSH_KEY}.pub" ]]; then
         docker exec -it prisma-orma chmod -R 770 /var/www/html/info-media
         docker exec -it prisma-orma chown -R www-data:www-data /usr/local/share/freeture
 	docker exec -it prisma-orma chmod -R 770 /usr/local/share/freeture
+	docker exec -it prisma-orma chown -R www-data:www-data /freeture
+	docker exec -it prisma-orma chmod -R 770 /freeture
 	docker exec -it prisma-orma chown -R www-data:www-data /keys
 	docker exec -it prisma-orma chmod -R 770 /keys
         chown -R root:prisma /etc/openvpn

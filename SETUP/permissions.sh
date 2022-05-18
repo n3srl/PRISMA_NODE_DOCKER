@@ -7,6 +7,8 @@ docker exec -it prisma-orma chown -R www-data:www-data /var/www/html/info-media
 docker exec -it prisma-orma chmod -R 770 /var/www/html/info-media
 docker exec -it prisma-orma chown -R www-data:www-data /usr/local/share/freeture
 docker exec -it prisma-orma chmod -R 770 /usr/local/share/freeture
+docker exec -it prisma-orma chown -R www-data:www-data /freeture
+docker exec -it prisma-orma chmod -R 770 /freeture
 chown -R root:prisma /etc/openvpn
 chmod -R 775 /etc/openvpn
 chown -R root:prisma /etc/prometheus
