@@ -1,3 +1,5 @@
+#!/bin/sh
+
 #Setting permissions
 
 echo "Setting permissions..."
