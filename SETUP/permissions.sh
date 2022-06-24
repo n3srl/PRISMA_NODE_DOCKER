@@ -15,6 +15,7 @@ chown -R root:prisma /etc/openvpn
 chmod -R 775 /etc/openvpn
 chown -R prometheus:prisma /etc/prometheus
 chmod -R 775 /etc/prometheus
+chmod 666 /var/run/docker.sock
 
 echo "Ended"
 
