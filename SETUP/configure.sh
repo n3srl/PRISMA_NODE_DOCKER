@@ -41,8 +41,8 @@ if [[ -f "${SSH_KEY}" && -f "${SSH_KEY}.pub" ]]; then
 	docker exec -it prisma-orma chmod -R 770 /keys
         chown -R root:prisma /etc/openvpn
         chmod -R 775 /etc/openvpn
-	chown -R prometheus:prisma /etc/prometheus
-        chmod -R 775 /etc/prometheus
+		#chown -R prometheus:prisma /etc/prometheus
+        #chmod -R 775 /etc/prometheus
         
         echo "Ended"
 
