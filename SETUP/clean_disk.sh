@@ -32,12 +32,14 @@ if [[ $du -gt $percentage ]]; then
  fi
  if [[ -z  $prismadata_path ]]; then
 	echo "usage: $0 /prismadata/<STATION CODE>/ <Start days> <Percentage> eg. /prismadata/ITLO06/ 360 80"
+	echo "start days: need to be at least 60"
 	exit;
  fi
 
  for (( day=$start_days; day>=60; day-- ))
  do
-  find_command="find $prismadata_path -type f -ctime +$day -exec rm -f {} \;"
+  find_command="find $prismadata_path -type f \( ! -name 'default.bmp'  \)  -ctime +$day -exec rm -f {} \;"
+  
   echo $find_command
   eval $find_command 
 
