@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM debian:buster
 
 #ARG DEBIAN_FRONTEND=noninteractive
 
@@ -33,22 +33,25 @@ RUN apt-get install -y --no-install-recommends \
 RUN apt-get install -y --no-install-recommends \    
     libcfitsio-dev libtool
 
-RUN wget https://github.com/opencv/opencv/archive/refs/tags/3.4.0.tar.gz \
-    && tar -xf 3.4.0.tar.gz && rm 3.4.0.tar.gz
-RUN mkdir -p build 
-WORKDIR build
-RUN cmake  ../opencv-3.4.0
-RUN cmake --build .
-RUN make install
+RUN apt-get install -y --no-install-recommends \    
+	libopencv-dev libopencv-contrib-dev  libopencv-core-dev libopencv-core3.2
+
+#RUN wget https://github.com/opencv/opencv/archive/refs/tags/3.4.0.tar.gz \
+ #   && tar -xf 3.4.0.tar.gz && rm 3.4.0.tar.gz
+#RUN mkdir -p build 
+#WORKDIR build
+#RUN cmake  ../opencv-3.4.0
+#RUN cmake --build .
+#RUN make install
    
-RUN ls bin
-RUN ls lib
+#RUN ls bin
+#RUN ls lib
 
-RUN echo "/usr/local/lib/" > /etc/ld.so.conf.d/opencv.conf
+#RUN echo "/usr/local/lib/" > /etc/ld.so.conf.d/opencv.conf
 
-RUN ldconfig -v
+#RUN ldconfig -v
 
-RUN find / -name "libopencv_core.so.3.4*"
+#RUN find / -name "libopencv_core.so.3.4*"
 
 
 RUN mkdir /usr/local/freeture-1.3.1
@@ -65,8 +68,8 @@ COPY ["configuration.cfg","/usr/local/share/freeture/"]
 
 WORKDIR /freeture
 
-RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-RUN ldd /usr/local/bin/freeture
+#RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+#RUN ldd /usr/bin/freeture
 
 
 
