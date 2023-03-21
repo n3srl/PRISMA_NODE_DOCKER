@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 #ARG DEBIAN_FRONTEND=noninteractive
 
@@ -21,7 +21,7 @@ RUN apt-get install -y --no-install-recommends \
 
 #aravis
 RUN apt-get install -y --no-install-recommends \
-    libaravis-0.6.0 libaravis-dev
+    libaravis-0.8.0 libaravis-dev
 
 #freeture
 RUN apt-get install -y --no-install-recommends \
@@ -34,30 +34,16 @@ RUN apt-get install -y --no-install-recommends \
     libcfitsio-dev libtool
 
 RUN apt-get install -y --no-install-recommends \    
-	libopencv-dev libopencv-contrib-dev  libopencv-core-dev libopencv-core3.2
-
-#RUN wget https://github.com/opencv/opencv/archive/refs/tags/3.4.0.tar.gz \
- #   && tar -xf 3.4.0.tar.gz && rm 3.4.0.tar.gz
-#RUN mkdir -p build 
-#WORKDIR build
-#RUN cmake  ../opencv-3.4.0
-#RUN cmake --build .
-#RUN make install
-   
-#RUN ls bin
-#RUN ls lib
-
-#RUN echo "/usr/local/lib/" > /etc/ld.so.conf.d/opencv.conf
-
-#RUN ldconfig -v
-
-#RUN find / -name "libopencv_core.so.3.4*"
-
+	libopencv-dev libopencv-contrib-dev  libopencv-core-dev
 
 RUN mkdir /usr/local/freeture-1.3.1
 RUN git clone https://github.com/n3srl/freeture.git /usr/local/freeture-1.3.1/freeture_git
 WORKDIR /usr/local/freeture-1.3.1/freeture_git/
-RUN chmod +x autogen.sh && ./autogen.sh && ./configure && make && make install
+RUN chmod +x autogen.sh 
+RUN ./autogen.sh 
+RUN ./configure
+RUN make 
+RUN make install
 
 
 #clear space
@@ -68,8 +54,6 @@ COPY ["configuration.cfg","/usr/local/share/freeture/"]
 
 WORKDIR /freeture
 
-#RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-#RUN ldd /usr/bin/freeture
 
 
 
