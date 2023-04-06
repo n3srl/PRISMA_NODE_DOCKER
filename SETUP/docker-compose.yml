@@ -19,7 +19,7 @@ services:
         source: freeture-data
         target: /freeture/
   freeture:
-    image: n3srl/freeture
+    image: n3srl/freeture13
     container_name: freeture
     restart: unless-stopped
     network_mode: "host"
