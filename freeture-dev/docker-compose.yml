@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  freeture:
+    image: freeture-dev
+    container_name: freeture-dev
+    restart: unless-stopped
+    network_mode: "host"
