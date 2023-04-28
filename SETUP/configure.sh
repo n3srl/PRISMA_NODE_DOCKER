@@ -26,7 +26,7 @@ if [[ -f "${SSH_KEY}" && -f "${SSH_KEY}.pub" ]]; then
         alpine cp -v /src/chiave /src/chiave.pub /src/passwd.txt /dst
 
         echo "Compose up..."
-        docker-compose up -d
+        docker compose up -d
 
         echo "Setting permissions..."
 	docker exec -it prisma-orma chown -R root:www-data /var/www/html/tmp-media
