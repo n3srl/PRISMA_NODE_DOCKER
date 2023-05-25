@@ -19,9 +19,8 @@ chmod -R 775 /etc/openvpn
 #chmod -R 775 /etc/prometheus
 chmod 666 /var/run/docker.sock
 
-chown -R prisma:prisma /prismadata/
-chown -R 777 /prismadata/
-
+chown -R prisma:www-data /prismadata/
+chmod -R 777 /prismadata/
 chmod -R 775 /etc/openvpn
 
 
