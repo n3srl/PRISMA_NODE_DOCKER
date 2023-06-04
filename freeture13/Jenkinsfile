@@ -8,10 +8,9 @@ node('Linux') {
 	   }
     }
     
-	/*stage('Push image') {
+	stage('Push image') {
         withDockerRegistry([ credentialsId: "n3_docker_hub", url: "" ]) {
-        dockerImage.push()
+			dockerImage.push()
         }
     }
-	*/
 }
