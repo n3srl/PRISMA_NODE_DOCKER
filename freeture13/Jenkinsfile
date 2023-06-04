@@ -1,4 +1,4 @@
-node {   
+node('Linux') {   
     stage('Build image') {
        dockerImage = docker.build("n3srl/freeture13:latest")
     }
