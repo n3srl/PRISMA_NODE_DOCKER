@@ -1,0 +1,12 @@
+node {   
+    stage('Build image') {
+       dockerImage = docker.build("n3srl/freeture13:latest")
+    }
+    
+	/*stage('Push image') {
+        withDockerRegistry([ credentialsId: "n3_docker_hub", url: "" ]) {
+        dockerImage.push()
+        }
+    }
+	*/
+}
