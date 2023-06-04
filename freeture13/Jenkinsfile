@@ -1,4 +1,7 @@
-node('Linux') {   
+node('Linux') {  
+	stage('Clone repository') {
+        git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git'
+    } 
     stage('Build image') {
        dockerImage = docker.build("n3srl/freeture13:latest")
     }
