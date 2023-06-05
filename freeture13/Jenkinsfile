@@ -4,7 +4,7 @@ node('Linux') {
     } 
     stage('Build image') {
        dir("freeture13"){
-		dockerImage = docker.build("n3srl/freeture13:latest")
+		dockerImage = docker.build("n3srl/freeture13:latest","--network=host")
 	   }
     }
     
