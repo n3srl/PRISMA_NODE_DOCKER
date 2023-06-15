@@ -19,6 +19,7 @@ services:
         source: freeture-data
         target: /freeture/
   freeture:
+    user: "1000:1000"
     image: n3srl/freeture13
     container_name: freeture
     restart: unless-stopped
