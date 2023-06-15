@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+  orma:
+    image: n3srl/orma-webmin
+    container_name: prisma-orma
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      - type: volume
+        source: freeture-conf
+        target: /usr/local/share/freeture/
+      - type: volume
+        source: orma-src
+        target: /var/www/html
+      - type: volume
+        source: orma-keys
+        target: /keys/
+      - type: volume
+        source: freeture-data
+        target: /freeture/
+  freeture:
+    user: "1000:1000"
+    image: n3srl/freeture
+    container_name: freeture
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      - type: volume
+        source: freeture-conf
+        target: /usr/local/share/freeture/
+      - type: volume
+        source: freeture-data
+        target: /freeture/
+    command: ["-m","3"]
+    depends_on:
+     - orma
+ 
+volumes:
+  freeture-conf:
+    external: true
+  freeture-data:
+    external: true
+  orma-src:
+    external: true
+  orma-keys:
+    external: true
