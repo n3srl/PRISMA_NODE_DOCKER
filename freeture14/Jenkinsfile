@@ -1,0 +1,16 @@
+node('docker') {  
+	stage('Clone repository') {
+        git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch:'main'
+    } 
+    stage('Build image') {
+       dir("freeture14"){
+			dockerImage = docker.build("n3srl/freeture14:latest")
+	   }
+    }
+    
+	stage('Push image') {
+        withDockerRegistry([ credentialsId: "n3_docker_hub", url: "" ]) {
+			dockerImage.push()
+        }
+    }
+}
