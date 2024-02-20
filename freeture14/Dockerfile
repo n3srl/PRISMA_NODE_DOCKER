@@ -36,7 +36,6 @@ RUN apt-get install -y --no-install-recommends \
 RUN apt-get install -y --no-install-recommends \    
 	libopencv-dev libopencv-contrib-dev  libopencv-core-dev
 
-RUN exit 0
 #Get freeture
 RUN mkdir /usr/local/freeture-1.4.1
 RUN git clone --branch acq_thread_refactoring https://github.com/n3srl/freeture.git /usr/local/freeture-1.4.1/freeture_git 
