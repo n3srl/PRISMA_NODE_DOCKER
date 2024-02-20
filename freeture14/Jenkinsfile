@@ -4,7 +4,11 @@ node('docker') {
     } 
     stage('Build image') {
        dir("freeture14"){
-			dockerImage = docker.build("n3srl/freeture14:latest")
+			def buildArgs = ""
+			if (params.FORCE_REBUILD) {
+				buildArgs = "--no-cache"
+            }
+			dockerImage = docker.build("n3srl/freeture14:latest", "${buildArgs} .")
 	   }
     }
     
