@@ -36,18 +36,19 @@ RUN apt-get install -y --no-install-recommends \
 RUN apt-get install -y --no-install-recommends \    
 	libopencv-dev libopencv-contrib-dev  libopencv-core-dev
 
+#Get ArenaSDK
 
 #Get freeture
-RUN mkdir /usr/local/freeture-1.3.1
-RUN git clone https://github.com/n3srl/freeture.git /usr/local/freeture-1.3.1/freeture_git 
+RUN mkdir /usr/local/freeture-1.4.1
+RUN git clone --branch acq_thread_refactoring https://github.com/n3srl/freeture.git /usr/local/freeture-1.4.1/freeture_git 
 
 #Install arenasdk, Genicam, ffmpeg
-WORKDIR /usr/local/freeture-1.3.1/freeture_git/src/sdk/
+WORKDIR /usr/local/freeture-1.4.1/freeture_git/src/sdk/
 RUN chmod +x install.sh
 RUN ./install.sh
 
 #Build freeture
-WORKDIR /usr/local/freeture-1.3.1/freeture_git/cmake/
+WORKDIR /usr/local/freeture-1.4.1/freeture_git/cmake/
 RUN cmake .
 RUN make 
 RUN make install
