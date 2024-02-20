@@ -17,7 +17,7 @@ RUN echo $TZ > /etc/timezone && \
 RUN apt-get install -y --no-install-recommends \
     wget unzip \
     g++ clang cmake make \
-    autoconf libgtk-3-dev intltool libxml2-dev build-essential git
+    autoconf libgtk-3-dev intltool libxml2-dev build-essential git sudo
 
 #aravis
 RUN apt-get install -y --no-install-recommends \
