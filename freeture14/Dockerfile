@@ -44,7 +44,7 @@ RUN git clone --branch acq_thread_refactoring https://github.com/n3srl/freeture.
 #Install arenasdk, Genicam, ffmpeg
 RUN git clone https://github.com/n3srl/ArenaSDK.git /usr/local/ArenaSDK
 RUN mv /usr/local/ArenaSDK/ubuntu20/ArenaSDK_Linux_x64 /opt/arenasdk/
-WORKDIR  /usr/local/ArenaSDK/ubuntu20/ArenaSDK_Linux_x64
+WORKDIR  /usr/local/ArenaSDK
 RUN chmod +x Arena_SDK_Linux_x64.conf
 RUN ./Arena_SDK_Linux_x64.conf -cti
 
