@@ -17,7 +17,7 @@ RUN echo $TZ > /etc/timezone && \
 RUN apt-get install -y --no-install-recommends \
     wget unzip \
     g++ clang cmake make \
-    autoconf libgtk-3-dev intltool libxml2-dev build-essential git sudo
+    autoconf libgtk-3-dev intltool libxml2-dev build-essential git sudo git-lfs
 
 #aravis
 RUN apt-get install -y --no-install-recommends \
@@ -43,6 +43,9 @@ RUN git clone --branch acq_thread_refactoring https://github.com/n3srl/freeture.
 
 #Install arenasdk, Genicam, ffmpeg
 RUN git clone https://github.com/n3srl/ArenaSDK.git /usr/local/ArenaSDK
+WORKDIR /usr/local/ArenaSDK
+RUN git lfs pull
+RUN rm -rf .git
 RUN mv /usr/local/ArenaSDK/ubuntu20/ArenaSDK_Linux_x64 /opt/arenasdk/
 WORKDIR  /opt/arenasdk/
 RUN chmod +x Arena_SDK_Linux_x64.conf
