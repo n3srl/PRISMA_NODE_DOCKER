@@ -46,7 +46,72 @@ RUN git clone https://github.com/n3srl/ArenaSDK.git /usr/local/ArenaSDK
 RUN mv /usr/local/ArenaSDK/ubuntu20/ArenaSDK_Linux_x64 /opt/arenasdk/
 WORKDIR  /opt/arenasdk/
 RUN chmod +x Arena_SDK_Linux_x64.conf
-RUN ./Arena_SDK_Linux_x64.conf -cti
+RUN ./Arena_SDK_Linux_x64.conf -cti /opt/arenasdk/GenICam/library/lib/Linux64_x64/
+
+run file /opt/arenasdk/lib64/libsave.so
+
+run file /opt/arenasdk/lib64/libavcored.so.0.1.84
+run file /opt/arenasdk/lib64/libsavec.so
+run file /opt/arenasdk/lib64/liblucidlogd.so.0.1.84
+run file /opt/arenasdk/lib64/libsave.so
+run file /opt/arenasdk/lib64/libsavecd.so.0
+run file /opt/arenasdk/lib64/libarenad.so.0
+run file /opt/arenasdk/lib64/libgentld.so
+run file /opt/arenasdk/lib64/libarenacd.so.0.1.84
+run file /opt/arenasdk/lib64/libsaved.so
+run file /opt/arenasdk/lib64/libarenac.so.0.1.84
+run file /opt/arenasdk/lib64/libsavecd.so.0.1.84
+run file /opt/arenasdk/lib64/libarena.so
+run file /opt/arenasdk/lib64/liblucidlog.so.0
+run file /opt/arenasdk/lib64/libsavecd.so
+run file /opt/arenasdk/lib64/libarenac.so
+run file /opt/arenasdk/lib64/libsave.so.0.1.84
+run file /opt/arenasdk/lib64/liblucidlog.so.0.1.84
+run file /opt/arenasdk/lib64/liblucidlogd.so
+run file /opt/arenasdk/lib64/libsaved.so.0
+run file /opt/arenasdk/lib64/libavcore.so.0
+run file /opt/arenasdk/lib64/libsavec.so.0
+run file /opt/arenasdk/lib64/libarena.so.0.1.84
+run file /opt/arenasdk/lib64/libarenad.so
+run file /opt/arenasdk/lib64/libarenad.so.0.1.84
+run file /opt/arenasdk/lib64/libsavec.so.0.1.84
+run file /opt/arenasdk/lib64/libsaved.so.0.1.84
+run file /opt/arenasdk/lib64/libgentl.so.0.1.84
+run file /opt/arenasdk/lib64/libarenac.so.0
+run file /opt/arenasdk/lib64/libgentld.so.0.1.84
+run file /opt/arenasdk/lib64/libgentld.so.0
+run file /opt/arenasdk/lib64/libavcored.so.0
+run file /opt/arenasdk/lib64/libarenacd.so.0
+run file /opt/arenasdk/lib64/libavcore.so
+run file /opt/arenasdk/lib64/libarena.so.0
+run file /opt/arenasdk/lib64/libgentl.so.0
+run file /opt/arenasdk/lib64/libsave.so.0
+run file /opt/arenasdk/lib64/libavcored.so
+run file /opt/arenasdk/lib64/liblucidlog.so
+run file /opt/arenasdk/lib64/libarenacd.so
+run file /opt/arenasdk/lib64/liblucidlogd.so.0
+run file /opt/arenasdk/lib64/libavcore.so.0.1.84
+run file /opt/arenasdk/lib64/libgentl.so
+run file /opt/arenasdk/GenICam/library/lib/Linux64_x64/libLog_gcc54_v3_3_LUCID.so
+run file /opt/arenasdk/GenICam/library/lib/Linux64_x64/liblog4cpp_gcc54_v3_3_LUCID.so
+run file /opt/arenasdk/GenICam/library/lib/Linux64_x64/libXmlParser_gcc54_v3_3_LUCID.so
+run file /opt/arenasdk/GenICam/library/lib/Linux64_x64/libNodeMapData_gcc54_v3_3_LUCID.so
+run file /opt/arenasdk/GenICam/library/lib/Linux64_x64/libGCBase_gcc54_v3_3_LUCID.so
+run file /opt/arenasdk/GenICam/library/lib/Linux64_x64/libMathParser_gcc54_v3_3_LUCID.so
+run file /opt/arenasdk/GenICam/library/lib/Linux64_x64/libGenApi_gcc54_v3_3_LUCID.so
+run file /opt/arenasdk/ffmpeg/libavutil.so.56
+run file /opt/arenasdk/ffmpeg/libavutil.so
+run file /opt/arenasdk/ffmpeg/libavutil.so.56.14.100
+run file /opt/arenasdk/ffmpeg/libavcodec.so
+run file /opt/arenasdk/ffmpeg/libavformat.so.58
+run file /opt/arenasdk/ffmpeg/libswresample.so
+run file /opt/arenasdk/ffmpeg/libavcodec.so.58.18.100
+run file /opt/arenasdk/ffmpeg/libavcodec.so.58
+run file /opt/arenasdk/ffmpeg/libswresample.so.3
+run file /opt/arenasdk/ffmpeg/libavformat.so
+run file /opt/arenasdk/ffmpeg/libavformat.so.58.12.100
+run file /opt/arenasdk/ffmpeg/libswresample.so.3.1.100
+
 
 #Build freeture
 WORKDIR /usr/local/freeture-1.4.1/freeture_git/cmake/
