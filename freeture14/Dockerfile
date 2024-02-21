@@ -38,7 +38,7 @@ RUN apt-get install -y --no-install-recommends \
 
 #Get freeture
 RUN mkdir /usr/local/freeture-1.4.1
-RUN git clone --branch acq_thread_refactoring https://github.com/n3srl/freeture.git /usr/local/freeture-1.4.1/freeture_git 
+RUN git clone --branch freeture14 https://github.com/n3srl/freeture.git /usr/local/freeture-1.4.1/freeture_git 
 
 
 #Install arenasdk, Genicam, ffmpeg
