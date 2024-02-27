@@ -1,12 +1,15 @@
 FROM ubuntu:jammy
 
 #ARG DEBIAN_FRONTEND=noninteractive
+#for Debian don't consider RUN and do the command, for WORKDIR = cd
 
 #downloads
 RUN apt-get -y update 
 
 #set UTC timezone
 ENV TZ 'UTC'
+
+#in Debian don't do RUN echo $TZ > /etc/timezone && \ but start from apt-get install -y --no-install-recommends tzdata && \
 RUN echo $TZ > /etc/timezone && \
     apt-get install -y --no-install-recommends tzdata && \
     rm /etc/localtime && \
