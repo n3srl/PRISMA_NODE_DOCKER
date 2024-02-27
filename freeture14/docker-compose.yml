@@ -1,8 +1,8 @@
 version: '3.7'
 services:
   freeture:
-    image: freeture13
-    container_name: freeture13
+    image: freeture14
+    container_name: freeture14
     restart: unless-stopped
     network_mode: "host"
     command: ["-m","3"]
