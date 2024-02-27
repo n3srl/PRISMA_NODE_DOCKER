@@ -33,5 +33,9 @@ node('docker') {
                 echo "Failed to remove Docker image: ${cleanupEx.getMessage()}"
             }
         }
+		
+		// Add this to remove the workspace
+        echo "Cleaning up workspace..."
+        deleteDir()
     }
 }
