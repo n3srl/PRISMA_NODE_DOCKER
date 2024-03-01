@@ -1,5 +1,5 @@
 node('docker') {  
-   def dockerImage = null
+    def dockerImage = null
 
 	try {
 		stage('Clone repository') {
@@ -20,11 +20,8 @@ node('docker') {
 				dockerImage.push()
 			}
 		}
-	} catch (Exception e) {
-        // Handle any failure in the previous stages
-        echo "An error occurred: ${e.getMessage()}"
-    } finally {
-        // Cleanup logic to remove Docker images/containers
+		
+		// Cleanup logic to remove Docker images/containers
         if (dockerImage) {
             echo "Cleaning up Docker image..."
             try {
@@ -37,5 +34,9 @@ node('docker') {
 		// Add this to remove the workspace
         echo "Cleaning up workspace..."
         deleteDir()
-    }
+		
+	} catch (Exception e) {
+        // Handle any failure in the previous stages
+        echo "An error occurred: ${e.getMessage()}"
+    } 
 }
