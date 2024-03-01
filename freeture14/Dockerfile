@@ -39,6 +39,8 @@ RUN apt-get install -y --no-install-recommends \
 RUN apt-get install -y --no-install-recommends \    
 	liblog4cpp5-dev pkg-config
 	
+RUN pkg-config --cflags log4cpp
+
 RUN apt-get install -y --no-install-recommends \    
 	libopencv-dev libopencv-contrib-dev  libopencv-core-dev
 
