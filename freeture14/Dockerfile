@@ -37,7 +37,7 @@ RUN apt-get install -y --no-install-recommends \
     libcfitsio-dev libtool
 	
 RUN apt-get install -y --no-install-recommends \    
-	liblog4cpp5-dev
+	liblog4cpp5-dev pkg-config
 	
 RUN apt-get install -y --no-install-recommends \    
 	libopencv-dev libopencv-contrib-dev  libopencv-core-dev
