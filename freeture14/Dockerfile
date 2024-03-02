@@ -49,6 +49,7 @@ RUN git clone https://github.com/n3srl/ArenaSDK.git /usr/local/ArenaSDK
 WORKDIR /usr/local/ArenaSDK
 RUN git lfs pull
 RUN rm -rf .git
+RUN rm -rf /usr/local/ArenaSDK/ubuntu20/ArenaSDK_Linux_x64/GenICam/library/CPP/include/log4cpp
 RUN mv /usr/local/ArenaSDK/ubuntu20/ArenaSDK_Linux_x64 /opt/arenasdk/
 WORKDIR  /opt/arenasdk/
 RUN chmod +x Arena_SDK_Linux_x64.conf
