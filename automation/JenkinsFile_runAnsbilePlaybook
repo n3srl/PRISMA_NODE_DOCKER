@@ -1,0 +1,31 @@
+pipeline {
+    agent docker
+    parameters {
+         string(name: 'ANSIBLE_PLAYBOOK_FILE', defaultValue: 'ansible/guest_node_update_freeture.yaml', description: 'Ansible playbook')
+         string(name: 'ANSIBLE_INVENTORY', defaultValue: 'ansible/inventory.ini', description: 'Ansible inventory')
+         credentials(name: 'PRISMA_NODE_DEFAULT_USER', description: 'User and password', type: 'com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl')
+	}
+    stages {
+        stage('Pull Ansible Docker Image') {
+            steps {
+                script {
+                    docker.pull('alpinelinux/ansible')
+                }
+            }
+        }
+
+        stage('Run Ansible Playbook') {
+            steps {
+                script {
+					 withCredentials([usernamePassword(credentialsId: 'PRISMA_NODE_DEFAULT_USER', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+						// Using the Docker Pipeline plugin to run the playbook inside the Docker container
+						docker.image('alpinelinux/ansible').inside("-v ${WORKSPACE}:/workspace") {
+							// Assicurati che il percorso del playbook sia corretto rispetto al volume montato
+							sh "ansible-playbook  -i /workspace/ansible/inventory.ini /workspace/${params.ANSIBLE_PLAYBOOK_FILE} -e ansible_user=${USERNAME} -e ansible_password=${PASSWORD}"
+						}
+					}
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+---
+- name: Check SSH availability on guest_nodes
+  hosts: guest_nodes
+  gather_facts: no
+  tasks:
+    - name: Check for SSH on port 22
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 22
+        timeout: 3
+      register: ssh_check
+      ignore_errors: true
+
+    - name: Add host to target_nodes
+      add_host:
+        name: "{{ inventory_hostname }}"
+        groups: target_nodes
+      when: ssh_check is target_nodes
+
+
+#- import_playbook: update_freeture_on_nodes.yaml

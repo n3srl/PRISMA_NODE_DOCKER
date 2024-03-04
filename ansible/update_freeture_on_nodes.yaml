@@ -1,0 +1,44 @@
+---
+- name: Update Docker containers on specified nodes
+  hosts: target_nodes
+  become: no
+  tasks:
+    - name: Move to the SETUP directory
+      ansible.builtin.command:
+        chdir: /home/prisma/SETUP
+        cmd: pwd
+      register: pwd_result
+    - debug:
+        var: pwd_result.stdout
+
+    - name: Stop all Docker containers with Docker Compose
+      ansible.builtin.command:
+        chdir: /home/prisma/SETUP
+        cmd: docker compose down
+      register: compose_down
+    - debug:
+        var: compose_down.stdout
+
+    - name: Pull the latest version of the containers with Docker Compose
+      ansible.builtin.command:
+        chdir: /home/prisma/SETUP
+        cmd: docker compose pull
+      register: compose_pull
+    - debug:
+        var: compose_pull.stdout
+
+    - name: Remove unused Docker images
+      ansible.builtin.command:
+        chdir: /home/prisma/SETUP
+        cmd: docker image prune -a -f
+      register: image_prune
+    - debug:
+        var: image_prune.stdout
+
+    - name: Start the Docker containers with Docker Compose in detached mode
+      ansible.builtin.command:
+        chdir: /home/prisma/SETUP
+        cmd: docker compose up -d
+      register: compose_up
+    - debug:
+        var: compose_up.stdout

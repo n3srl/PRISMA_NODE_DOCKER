@@ -1,0 +1,24 @@
+---
+- name: Check SSH availability on guest_nodes
+  hosts: guest_nodes
+  gather_facts: no
+  tasks:
+    - name: Check for SSH on port 22
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 22
+        timeout: 10
+      register: ssh_check
+      ignore_errors: true
+
+    - name: Add host to ssh_reachable_guest_nodes
+      add_host:
+        name: "{{ inventory_hostname }}"
+        groups: ssh_reachable_guest_nodes
+      when: ssh_check is succeeded
+
+- name: Run playbook on SSH reachable guest_nodes
+  hosts: ssh_reachable_guest_nodes
+  gather_facts: yes
+  tasks:
+    # Your main tasks go here

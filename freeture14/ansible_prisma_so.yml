@@ -1,0 +1,121 @@
+
+---
+- name: Configurazione del server
+  hosts: all
+  become: yes
+  tasks:
+    - name: Aggiornamento dei repository apt e upgrade dei pacchetti
+      apt:
+        update_cache: yes
+        upgrade: 'yes'
+
+    - name: Installazione di pacchetti base
+      apt:
+        name:
+          - unzip
+          - zip
+          - git
+          - wget
+          - curl
+          - openvpn
+          - rfkill
+          - ssh
+        state: present
+
+    - name: Configurazione di ~/.bashrc e /home/prisma/.bashrc
+      lineinfile:
+        path: "{{ item }}"
+        line: 'export PATH="$PATH:/usr/sbin/"'
+        create: yes
+      loop:
+        - ~/.bashrc
+        - /home/prisma/.bashrc
+
+    - name: Installazione di Docker e configurazione del repository
+      block:
+        - name: Installazione di dipendenze per Docker
+          apt:
+            name:
+              - ca-certificates
+              - gnupg
+            state: present
+
+        - name: Aggiunta della chiave GPG ufficiale di Docker
+          ansible.builtin.apt_key:
+            url: https://download.docker.com/linux/debian/gpg
+            state: present
+
+        - name: Aggiunta del repository di Docker
+          ansible.builtin.apt_repository:
+            repo: deb [arch={{ ansible_architecture }} signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable
+            state: present
+
+        - name: Installazione di Docker CE e strumenti correlati
+          apt:
+            name:
+              - docker-ce
+              - docker-ce-cli
+              - containerd.io
+              - docker-buildx-plugin
+              - docker-compose-plugin
+            state: present
+
+        - name: Aggiungere l'utente prisma al gruppo docker
+          user:
+            name: prisma
+            groups: docker
+            append: yes
+
+    - name: Installazione e configurazione di Node Exporter
+      block:
+        - name: Download di Node Exporter
+          get_url:
+            url: https://github.com/prometheus/node_exporter/releases/download/v1.3.1/node_exporter-1.3.1.linux-386.tar.gz
+            dest: "/home/prisma/node_exporter-1.3.1.linux-386.tar.gz"
+
+        - name: Estrazione di Node Exporter
+          ansible.builtin.unarchive:
+            src: "/home/prisma/node_exporter-1.3.1.linux-386.tar.gz"
+            dest: "/home/prisma/"
+            remote_src: yes
+            creates: "/home/prisma/node_exporter"
+
+        - name: Pulizia del file tar di Node Exporter
+          file:
+            path: "/home/prisma/node_exporter-1.3.1.linux-386.tar.gz"
+            state: absent
+
+        - name: Creazione del servizio systemd per Node Exporter
+          template:
+            src: node_exporter.service.j2
+            dest: /etc/systemd/system/node_exporter.service
+          notify: reload systemctl daemon
+
+    - name: Disabilitazione di IPv6
+      sysctl:
+        name: net.ipv6.conf.all.disable_ipv6
+        value: '1'
+        state: present
+        reload: yes
+
+    - name: Configurazione di Avahi per mDNS, se necessario
+      block:
+        - name: Installazione di Avahi daemon
+          apt:
+            name: avahi-daemon
+            state: present
+
+        - name: Configurazione di Avahi daemon
+          template:
+            src: avahi-daemon.conf.j2
+            dest: /etc/avahi/avahi-daemon.conf
+          notify: restart avahi-daemon
+
+  handlers:
+    - name: reload systemctl daemon
+      command: systemctl daemon-reload
+
+    - name: restart avahi-daemon
+      service:
+        name: avahi-daemon
+        state: restarted
