@@ -2,8 +2,11 @@ node('docker') {
     // Parameters
     def ANSIBLE_PLAYBOOK_FILE = 'ansible/guest_node_update_freeture.yaml'
     def ANSIBLE_INVENTORY = 'ansible/inventory.ini'
-	def OPENVPN_CONF_CONTENT // This will hold the content of the openvpn.conf file
-
+	
+	// Load the content of the openvpn.conf file from the secret file parameter
+	withCredentials([file(credentialsId: 'PRISMA_GUEST_OPENVPN_CONF', variable: 'OPENVPN_CONF_FILE')]) {
+		OPENVPN_CONF_CONTENT = readFile OPENVPN_CONF_FILE
+	}
     // Credentials
     def ANSIBLE_USER = params.ANSIBLE_USER
 
