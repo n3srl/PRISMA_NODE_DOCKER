@@ -22,7 +22,7 @@ node('docker') {
                 sh """
 					ls /
 					ls /ansible
-					ansible-playbook -i ${ANSIBLE_INVENTORY}  ${ANSIBLE_PLAYBOOK_FILE} -e ansible_user=${USERNAME} -e ansible_password=${PASSWORD}
+					ansible-playbook -i ${ANSIBLE_INVENTORY}  ${ANSIBLE_PLAYBOOK_FILE}
 				"""
             }
         }
