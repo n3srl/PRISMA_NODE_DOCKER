@@ -21,8 +21,7 @@ node('docker') {
                 // Make sure the playbook path is correct relative to the mounted volume
                 sh """
 					ls /
-					
-					ls /ansible
+					cd ansible
 					ansible-playbook -i /ansible/workspace/ansible/inventory.ini  /ansible/workspace/${ANSIBLE_PLAYBOOK_FILE} -e ansible_user=${USERNAME} -e ansible_password=${PASSWORD}
 				"""
             }
