@@ -42,12 +42,11 @@ node('docker') {
 					"""
                     
 					sh """
-					echo "auth-user-pass /etc/openvpn/openvpn_credentials.txt" >> /etc/openvpn/openvpn.conf
 					echo -e "${OPENVPN_USERNAME}\n${OPENVPN_PASSWORD}\n" > /etc/openvpn/openvpn_credentials.txt
 				
 					"""
                     // Start OpenVPN
-                    sh "openvpn --config /etc/openvpn/openvpn.conf --auth-nocache"
+                    sh "openvpn --config /etc/openvpn/openvpn.conf --auth-user-pass /etc/openvpn/openvpn_credentials.txt"
                 }
             }
         }
