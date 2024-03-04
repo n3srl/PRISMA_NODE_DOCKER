@@ -3,6 +3,7 @@ node('docker') {
     def ANSIBLE_PLAYBOOK_FILE = 'ansible/guest_node_update_freeture.yaml'
     def ANSIBLE_INVENTORY = 'ansible/inventory.ini'
 	
+	
 	// Load the content of the openvpn.conf file from the secret file parameter
 	withCredentials([file(credentialsId: 'PRISMA_GUEST_OPENVPN_CONF', variable: 'OPENVPN_CONF_FILE')]) {
 		OPENVPN_CONF_CONTENT = readFile OPENVPN_CONF_FILE
@@ -10,25 +11,19 @@ node('docker') {
     // Credentials
     def ANSIBLE_USER = params.ANSIBLE_USER
 
-    // Stage 1: Pull Ansible Docker Image
-    stage('Pull Ansible Docker Image') {
-        script {
-            docker.image('webdevops/ansible').pull()
-        }
-    }
+    def docker_image = docker.image('debian:bullseye').pull()
 	
 	 // Stage 2: Run OpenVPN
-    stage('Run OpenVPN') {
+    stage('Install & Run OpenVPN') {
         withCredentials([usernamePassword(credentialsId: 'PRISMA_GUEST_OPENVPN_CREDENTIALS', passwordVariable: 'OPENVPN_PASSWORD', usernameVariable: 'OPENVPN_USERNAME')]) {
             // Using the Docker Pipeline plugin to run OpenVPN inside the Docker container
-            docker.image('webdevops/ansible').inside("-v \"${WORKSPACE}:/ansible\" -u root:root \"") {
+            docker_image.inside("-v \"${WORKSPACE}:/ansible\" -u root:root \"") {
                 // Set the OpenVPN credentials as environment variables
                 withEnv(["OPENVPN_USERNAME=${OPENVPN_USERNAME}", "OPENVPN_PASSWORD=${OPENVPN_PASSWORD}"]) {
                     
 					// Write the OpenVPN configuration file
 					sh """
 					apt-get update
-					apt-get install ca-certificates gnupg -y
 					apt-get install openvpn -y
 					
 					if [ ! -d "/etc/openvpn" ]; then
@@ -53,15 +48,15 @@ node('docker') {
 
 
     // Stage 2: Run Ansible Playbook
-    stage('Run Ansible Playbook') {
+    stage('Install & Run Ansible Playbook') {
         withCredentials([usernamePassword(credentialsId: 'ANSIBLE_USER', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')])
 		{
             // Using the Docker Pipeline plugin to run the playbook inside the Docker container
-            docker.image('webdevops/ansible').inside("-v \"${WORKSPACE}:/ansible\" -u root:root \"") {
+            docker_image.inside("-v \"${WORKSPACE}:/ansible\" -u root:root \"") {
 			
 				// Make sure the playbook path is correct relative to the mounted volume
 				sh """			
-					
+					apt-get install ansible
 					ls /
 					ls /ansible
 					ansible-playbook -i ${ANSIBLE_INVENTORY}  ${ANSIBLE_PLAYBOOK_FILE}
