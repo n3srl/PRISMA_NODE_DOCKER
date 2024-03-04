@@ -27,6 +27,8 @@ node('docker') {
                     
 					// Write the OpenVPN configuration file
 					sh """
+					apk add zenity
+					
 					apk add openvpn
 					
 					if [ ! -d "/etc/openvpn" ]; then
@@ -42,11 +44,15 @@ node('docker') {
 					"""
                     
 					sh """
-					echo -e "${OPENVPN_USERNAME}\n${OPENVPN_PASSWORD}\n" > /etc/openvpn/openvpn_credentials.txt
-				
+					echo -e  "auth-user-pass /etc/openvpn/" > /etc/openvpn/openvpn.conf
+					
+					
+					echo -e "${OPENVPN_USERNAME}\n${OPENVPN_PASSWORD}\n" > /etc/openvpn/auth.txt
+					chmod 600 /etc/openvpn/auth.txt
 					"""
+					
                     // Start OpenVPN
-                    sh "openvpn --config /etc/openvpn/openvpn.conf --auth-user-pass /etc/openvpn/openvpn_credentials.txt"
+                    sh "openvpn --config /etc/openvpn/openvpn.conf"
                 }
             }
         }
