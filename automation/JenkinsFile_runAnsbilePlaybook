@@ -28,7 +28,7 @@ node('docker') {
 					// Write the OpenVPN configuration file
 					sh """
 					apt-get update
-					apt-get install openvpn
+					apt-get install openvpn -y
 					
 					if [ ! -d "/etc/openvpn" ]; then
 					mkdir /etc/openvpn
