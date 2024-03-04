@@ -21,7 +21,7 @@ node('docker') {
     stage('Run OpenVPN') {
         withCredentials([usernamePassword(credentialsId: 'PRISMA_GUEST_OPENVPN_CREDENTIALS', passwordVariable: 'OPENVPN_PASSWORD', usernameVariable: 'OPENVPN_USERNAME')]) {
             // Using the Docker Pipeline plugin to run OpenVPN inside the Docker container
-            docker.image('alpinelinux/ansible').inside("-v \"${WORKSPACE}:/ansible\" -u root:root \"") {
+            docker.image('webdevops/ansible').inside("-v \"${WORKSPACE}:/ansible\" -u root:root \"") {
                 // Set the OpenVPN credentials as environment variables
                 withEnv(["OPENVPN_USERNAME=${OPENVPN_USERNAME}", "OPENVPN_PASSWORD=${OPENVPN_PASSWORD}"]) {
                     
@@ -54,7 +54,7 @@ node('docker') {
         withCredentials([usernamePassword(credentialsId: 'ANSIBLE_USER', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')])
 		{
             // Using the Docker Pipeline plugin to run the playbook inside the Docker container
-            docker.image('alpinelinux/ansible').inside("-v \"${WORKSPACE}:/ansible\" -u root:root \"") {
+            docker.image('webdevops/ansible').inside("-v \"${WORKSPACE}:/ansible\" -u root:root \"") {
 			
 				// Make sure the playbook path is correct relative to the mounted volume
 				sh """			
