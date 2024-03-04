@@ -22,6 +22,8 @@ node('docker') {
                 sh """
 					cd
 					pwd
+					ls
+					
 					ansible-playbook -i /workspace/ansible/inventory.ini /workspace/${ANSIBLE_PLAYBOOK_FILE} -e ansible_user=${USERNAME} -e ansible_password=${PASSWORD}
 				"""
             }
