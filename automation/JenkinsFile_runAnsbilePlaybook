@@ -1,5 +1,5 @@
 pipeline {
-    agent docker
+    agent { 'docker' } 
     parameters {
          string(name: 'ANSIBLE_PLAYBOOK_FILE', defaultValue: 'ansible/guest_node_update_freeture.yaml', description: 'Ansible playbook')
          string(name: 'ANSIBLE_INVENTORY', defaultValue: 'ansible/inventory.ini', description: 'Ansible inventory')
