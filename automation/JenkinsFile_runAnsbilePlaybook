@@ -19,7 +19,7 @@ node('docker') {
 	
 	 // Stage 2: Run OpenVPN
     stage('Run OpenVPN') {
-        withCredentials([usernamePassword(credentialsId: 'PRISMA_OPENVPN_CREDENTIALS', passwordVariable: 'OPENVPN_PASSWORD', usernameVariable: 'OPENVPN_USERNAME')]) {
+        withCredentials([usernamePassword(credentialsId: 'PRISMA_GUEST_OPENVPN_CREDENTIALS', passwordVariable: 'OPENVPN_PASSWORD', usernameVariable: 'OPENVPN_USERNAME')]) {
             // Using the Docker Pipeline plugin to run OpenVPN inside the Docker container
             docker.image('alpine:latest').inside {
                 // Set the OpenVPN credentials as environment variables
