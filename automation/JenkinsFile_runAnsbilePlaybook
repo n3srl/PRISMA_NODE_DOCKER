@@ -30,9 +30,9 @@ node('docker') {
 				"""
 
 				sh """
-				cat << 'DELIMITER' > /etc/openvpn/openvpn.conf
+				cat << '#DELIMITER' > /etc/openvpn/openvpn.conf
 				${OPENVPN_CONF_CONTENT}
-				DELIMITER
+				#DELIMITER
 				"""
 				sh """			
 					cat  /etc/openvpn/openvpn.conf
