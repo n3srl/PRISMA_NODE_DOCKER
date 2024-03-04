@@ -10,7 +10,6 @@ node('docker') {
     stage('Pull Ansible Docker Image') {
         script {
             docker.image('alpinelinux/ansible').pull()
-			dockerImage.user('root:root')
         }
     }
 
