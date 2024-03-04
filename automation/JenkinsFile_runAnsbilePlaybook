@@ -27,7 +27,7 @@ node('docker') {
 
 				// Make sure the playbook path is correct relative to the mounted volume
                 sh """
-					
+					cat  /etc/openvpn/openvpn.conf
 					apk add openvpn
 				
 					sysctl -p /etc/sysctl.d/ipv4.conf
