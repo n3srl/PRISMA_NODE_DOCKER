@@ -40,15 +40,7 @@ node('docker') {
 					${OPENVPN_CONF_CONTENT}
 					#DELIMITER
 					"""
-                    
-					sh """
-					echo -e  "auth-user-pass /etc/openvpn/auth.txt" > /etc/openvpn/openvpn.conf
-					echo -e  "dev tun" > /etc/openvpn/openvpn.conf
-					
-					echo -e "${OPENVPN_USERNAME}\n${OPENVPN_PASSWORD}\n" > /etc/openvpn/auth.txt
-					chmod 600 /etc/openvpn/auth.txt
-					"""
-					
+
                     // Start OpenVPN
                     sh "openvpn --config /etc/openvpn/openvpn.conf"
                 }
