@@ -27,7 +27,10 @@ node('docker') {
 				// Make sure the playbook path is correct relative to the mounted volume
                 sh """
 					mkdir /etc/openvpn
-					echo '${OPENVPN_CONF_CONTENT}' > /etc/openvpn/openvpn.conf
+					 cat << 'EOF' > /etc/openvpn/openvpn.conf
+					${OPENVPN_CONF_CONTENT}
+					EOF
+					
 					cat  /etc/openvpn/openvpn.conf
 					apk add openvpn
 				
