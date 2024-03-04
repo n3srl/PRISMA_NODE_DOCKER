@@ -16,6 +16,33 @@ node('docker') {
             docker.image('alpinelinux/ansible').pull()
         }
     }
+	
+	 // Stage 2: Run OpenVPN
+    stage('Run OpenVPN') {
+        withCredentials([usernamePassword(credentialsId: 'PRISMA_OPENVPN_CREDENTIALS', passwordVariable: 'OPENVPN_PASSWORD', usernameVariable: 'OPENVPN_USERNAME')]) {
+            // Using the Docker Pipeline plugin to run OpenVPN inside the Docker container
+            docker.image('alpine:latest').inside {
+                // Set the OpenVPN credentials as environment variables
+                withEnv(["OPENVPN_USERNAME=${OPENVPN_USERNAME}", "OPENVPN_PASSWORD=${OPENVPN_PASSWORD}"]) {
+                    
+					// Write the OpenVPN configuration file
+					sh """
+					mkdir /etc/openvpn
+					"""
+
+                    sh """
+					cat << '#DELIMITER' > /etc/openvpn/openvpn.conf
+					${OPENVPN_CONF_CONTENT}
+					#DELIMITER
+					"""
+                    
+                    // Start OpenVPN
+                    sh "openvpn --config /etc/openvpn/openvpn.conf --auth-nocache"
+                }
+            }
+        }
+    }
+
 
     // Stage 2: Run Ansible Playbook
     stage('Run Ansible Playbook') {
@@ -25,21 +52,11 @@ node('docker') {
             docker.image('alpinelinux/ansible').inside("-v \"${WORKSPACE}:/ansible\" -u root:root \"") {
 			
 				// Make sure the playbook path is correct relative to the mounted volume
-                sh """
-					mkdir /etc/openvpn
-				"""
-
-				sh """
-				cat << '#DELIMITER' > /etc/openvpn/openvpn.conf
-				${OPENVPN_CONF_CONTENT}
-				#DELIMITER
-				"""
 				sh """			
 					cat  /etc/openvpn/openvpn.conf
 					apk add openvpn
-				
-					sysctl -p /etc/sysctl.d/ipv4.conf
-					openvpn --config /etc/openvpn/openvpn.conf
+					
+					openvpn --config /etc/openvpn/openvpn.conf --auth-nocache
 					ls /
 					ls /ansible
 					ansible-playbook -i ${ANSIBLE_INVENTORY}  ${ANSIBLE_PLAYBOOK_FILE}
