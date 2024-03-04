@@ -44,7 +44,8 @@ node('docker') {
 					"""
 
                     // Start OpenVPN
-                    sh "openvpn --config /etc/openvpn/openvpn.conf"
+                    sh "systemctl daemon-reload"
+					sh "service openvpn restart"
                 }
             }
         }
