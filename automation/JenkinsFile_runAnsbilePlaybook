@@ -4,7 +4,7 @@ node('docker') {
     def ANSIBLE_INVENTORY = 'ansible/inventory.ini'
 
     // Credentials
-    def ANSIBLE_USER = credentials('ANSIBLE_USER')
+    def ANSIBLE_USER = params.ANSIBLE_USER
 
     // Stage 1: Pull Ansible Docker Image
     stage('Pull Ansible Docker Image') {
