@@ -24,7 +24,7 @@ node('docker') {
                 sh """
 					mkdir /etc/openvpn
 					
-				    echo "${OPENVPN_CONF_FILE}" /etc/openvpn/openvpn.conf
+				    echo "${OPENVPN_CONF_CONTENT}" /etc/openvpn/openvpn.conf
 					apk add openvpn
 					echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.d/ipv4.conf
 					sysctl -p /etc/sysctl.d/ipv4.conf
