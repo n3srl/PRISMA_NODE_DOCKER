@@ -17,7 +17,7 @@ node('docker') {
     stage('Run Ansible Playbook') {
         withCredentials([usernamePassword(credentialsId: 'ANSIBLE_USER', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
             // Using the Docker Pipeline plugin to run the playbook inside the Docker container
-            docker.image('alpinelinux/ansible').inside("-v \"${WORKSPACE}:/ansible"") {
+            docker.image('alpinelinux/ansible').inside("-v \"${WORKSPACE}:/ansible\"") {
                 // Make sure the playbook path is correct relative to the mounted volume
                 sh """
 					ls /
