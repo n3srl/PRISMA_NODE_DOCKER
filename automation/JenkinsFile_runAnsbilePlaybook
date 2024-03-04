@@ -23,13 +23,13 @@ node('docker') {
 		{
             // Using the Docker Pipeline plugin to run the playbook inside the Docker container
             docker.image('alpinelinux/ansible').inside("-v \"${WORKSPACE}:/ansible\" -u root:root \"") {
+			    writeFile file: ' /etc/openvpn/openvpn.conf', text: OPENVPN_CONF_CONTENT
+
 				// Make sure the playbook path is correct relative to the mounted volume
                 sh """
-					mkdir /etc/openvpn
 					
-				    echo "${OPENVPN_CONF_CONTENT}" /etc/openvpn/openvpn.conf
 					apk add openvpn
-					echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.d/ipv4.conf
+				
 					sysctl -p /etc/sysctl.d/ipv4.conf
 					openvpn --config /etc/openvpn/openvpn.conf
 					ls /
