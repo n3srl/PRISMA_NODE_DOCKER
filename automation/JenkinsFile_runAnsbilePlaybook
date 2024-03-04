@@ -20,10 +20,8 @@ node('docker') {
             docker.image('alpinelinux/ansible').inside("-v \"${WORKSPACE}:/ansible\"") {
                 // Make sure the playbook path is correct relative to the mounted volume
                 sh """
-				    export ANSIBLE_LOCAL_TEMP=/ansible
 					ls /
-					cd ansible
-					ls
+					ls /ansible
 					ansible-playbook -i ${ANSIBLE_INVENTORY}  ${ANSIBLE_PLAYBOOK_FILE} -e ansible_user=${USERNAME} -e ansible_password=${PASSWORD}
 				"""
             }
