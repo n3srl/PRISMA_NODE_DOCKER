@@ -27,6 +27,8 @@ node('docker') {
                     
 					// Write the OpenVPN configuration file
 					sh """
+					apk add openvpn
+					
 					mkdir /etc/openvpn
 					"""
 
@@ -53,10 +55,7 @@ node('docker') {
 			
 				// Make sure the playbook path is correct relative to the mounted volume
 				sh """			
-					cat  /etc/openvpn/openvpn.conf
-					apk add openvpn
 					
-					openvpn --config /etc/openvpn/openvpn.conf --auth-nocache
 					ls /
 					ls /ansible
 					ansible-playbook -i ${ANSIBLE_INVENTORY}  ${ANSIBLE_PLAYBOOK_FILE}
