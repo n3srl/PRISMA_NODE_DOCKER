@@ -9,7 +9,7 @@ node('docker') {
     // Stage 1: Pull Ansible Docker Image
     stage('Pull Ansible Docker Image') {
         script {
-            docker.image('rancher/ansible-runner').pull()
+            docker.image('alpinelinux/ansible').pull()
         }
     }
 
