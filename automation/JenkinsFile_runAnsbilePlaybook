@@ -29,7 +29,10 @@ node('docker') {
 					sh """
 					apk add openvpn
 					
+					if [ ! -d "/etc/openvpn" ]; then
 					mkdir /etc/openvpn
+					fi
+					
 					"""
 
                     sh """
