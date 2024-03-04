@@ -19,7 +19,11 @@ node('docker') {
             // Using the Docker Pipeline plugin to run the playbook inside the Docker container
             docker.image('alpinelinux/ansible').inside("-v \"${WORKSPACE}:/home/workspace\"") {
                 // Make sure the playbook path is correct relative to the mounted volume
-                sh "ansible-playbook -i /workspace/ansible/inventory.ini /workspace/${ANSIBLE_PLAYBOOK_FILE} -e ansible_user=${USERNAME} -e ansible_password=${PASSWORD}"
+                sh """
+					cd
+					pwd
+					ansible-playbook -i /workspace/ansible/inventory.ini /workspace/${ANSIBLE_PLAYBOOK_FILE} -e ansible_user=${USERNAME} -e ansible_password=${PASSWORD}
+				"""
             }
         }
     }
