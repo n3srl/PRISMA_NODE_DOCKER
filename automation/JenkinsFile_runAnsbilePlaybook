@@ -66,7 +66,7 @@ node('docker') {
 			
 				// Make sure the playbook path is correct relative to the mounted volume
 				sh """			
-					apt-get install ansible
+					apt-get -y install ansible
 					ls /
 					ls /ansible
 					ansible-playbook -i ${ANSIBLE_INVENTORY}  ${ANSIBLE_PLAYBOOK_FILE}
