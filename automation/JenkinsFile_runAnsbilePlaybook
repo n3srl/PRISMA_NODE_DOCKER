@@ -49,12 +49,19 @@ node('docker') {
 					#DELIMITER
 					"""
 					sh """
+					
+					echo "log-append /var/log/openvon.log" >> /etc/openvpn/openvpn.conf
+					
 					systemctl enable --now openvpn
 					
                     systemctl daemon-reload
 					
-					
 					systemctl status openvpn
+					
+					sleep 5
+						
+					cat /var/log/openvon.log
+					
 					
 					ip addr
 					"""
