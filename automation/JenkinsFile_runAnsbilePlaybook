@@ -30,7 +30,7 @@ node('docker') {
 			"""
 			
             // Using the Docker Pipeline plugin to run OpenVPN inside the Docker container
-            docker_image.inside("-v \"${WORKSPACE}:/ansible\" -u root:root --network host\"") {
+            docker_image.inside("-v \"${WORKSPACE}:/ansible\" -u root:root --device=/dev/net/tun --cap-add=NET_ADMIN  --network host\"") {
                     
 					// Write the OpenVPN configuration file
 					sh """
