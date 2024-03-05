@@ -50,7 +50,7 @@ node('docker') {
 					"""
 					sh """
 					
-					echo "log-append /var/log/openvon.log" >> /etc/openvpn/openvpn.conf
+					echo "log-append /var/log/openvpn.log" >> /etc/openvpn/openvpn.conf
 					
 					systemctl enable --now openvpn
 					
@@ -60,8 +60,9 @@ node('docker') {
 					
 					sleep 5
 						
-					cat /var/log/openvon.log
-					
+					if [ -d "/etc/openvpn" ]; then
+					cat /var/log/openvpn.log
+					fi
 					
 					ip addr
 					"""
