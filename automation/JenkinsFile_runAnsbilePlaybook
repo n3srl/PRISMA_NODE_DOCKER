@@ -24,9 +24,10 @@ node('docker') {
 	 // Stage 2: Run OpenVPN, Run Ansible Playbook
     stage('Install & Run OpenVPN & Ansible') {
         withCredentials([usernamePassword(credentialsId: 'ANSIBLE_USER', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+			
             // Using the Docker Pipeline plugin to run OpenVPN inside the Docker container
             docker_image.inside("-v \"${WORKSPACE}:/ansible\" -u root:root \"") {
-                
+					
                     
 					// Write the OpenVPN configuration file
 					sh """
@@ -51,7 +52,8 @@ node('docker') {
 					service openvpn restart
 					"""
 					
-					sh """			
+					sh """
+					git pull
 					cat ${ANSIBLE_INVENTORY}
 					apt-get -y install ansible
 					ls /
@@ -62,5 +64,6 @@ node('docker') {
             }
         }
     }
-x
+    // Clean up workspace
+    cleanWs()
 }
