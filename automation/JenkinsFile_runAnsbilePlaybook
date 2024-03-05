@@ -54,6 +54,8 @@ node('docker') {
 
                     systemctl daemon-reload
 					service openvpn restart
+					
+					ip addr
 					"""
 					
 					sh """
