@@ -27,6 +27,7 @@ node('docker') {
         withCredentials([usernamePassword(credentialsId: 'ANSIBLE_USER', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
 			
 			sh """
+				whoami
 				git pull origin main
 			"""
 			
