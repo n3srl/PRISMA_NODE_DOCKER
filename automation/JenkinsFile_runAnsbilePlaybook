@@ -45,11 +45,12 @@ node('docker') {
 					${OPENVPN_CONF_CONTENT}
 					#DELIMITER
 					"""
+					sh """
 					apt-get -y install systemctl
 
-                    // Start OpenVPN
-                    sh "systemctl daemon-reload"
-					sh "service openvpn restart"
+                    systemctl daemon-reload
+					service openvpn restart
+					"""
                 }
             }
         }
