@@ -32,34 +32,34 @@ node('docker') {
 			"""
 			
 			sh """
-					sudo apt-get update
-					sudo apt-get -y install systemctl openvpn 
+					sudo DEBIAN_FRONTEND=noninteractive apt-get update
+					sudo DEBIAN_FRONTEND=noninteractive apt-get -y install systemctl openvpn 
 					
 					if [ ! -d "/etc/openvpn" ]; then
-					sudo mkdir /etc/openvpn
+					sudo DEBIAN_FRONTEND=noninteractive mkdir /etc/openvpn
 					fi
 			"""
 				
                 sh """
-					sudo cat << '#DELIMITER' > /etc/openvpn/openvpn.conf
+					sudo DEBIAN_FRONTEND=noninteractive cat << '#DELIMITER' > /etc/openvpn/openvpn.conf
 					${OPENVPN_CONF_CONTENT}
 					#DELIMITER
 				"""
 				
 				sh """
-					sudo echo "log-append /var/log/openvpn.log" >> /etc/openvpn/openvpn.conf
+					sudo DEBIAN_FRONTEND=noninteractive echo "log-append /var/log/openvpn.log" >> /etc/openvpn/openvpn.conf
 					
-					sudo systemctl enable --now openvpn
+					sudo DEBIAN_FRONTEND=noninteractive systemctl enable --now openvpn
 					
-                    sudo systemctl daemon-reload
+                    sudo DEBIAN_FRONTEND=noninteractive systemctl daemon-reload
 					
-					sudo systemctl status openvpn
+					sudo DEBIAN_FRONTEND=noninteractive systemctl status openvpn
 					
 					sleep 5
 					
 						
 					if [ -d "/etc/openvpn/openvpn.log" ]; then
-					sudo cat /var/log/openvpn.log
+					sudo DEBIAN_FRONTEND=noninteractive cat /var/log/openvpn.log
 					fi
 					
 					ip addr
@@ -70,9 +70,9 @@ node('docker') {
                     
 					// Write the OpenVPN configuration file
 					sh """
-					apt-get update
+					sudo DEBIAN_FRONTEND=noninteractive apt-get update
 					
-					apt-get -y install ansible
+					sudo DEBIAN_FRONTEND=noninteractive apt-get -y install ansible
 					
 					cat ${ANSIBLE_INVENTORY}
 					
