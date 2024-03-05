@@ -49,9 +49,10 @@ node('docker') {
 					#DELIMITER
 					"""
 					sh """
+					systemctl enable --now openvpn
 					
                     systemctl daemon-reload
-					service openvpn restart
+					
 					
 					systemctl status openvpn
 					
