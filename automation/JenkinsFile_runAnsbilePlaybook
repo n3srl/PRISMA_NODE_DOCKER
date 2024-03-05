@@ -53,6 +53,7 @@ node('docker') {
 					"""
 					
 					sh """
+					apt-get -y install git
 					git pull
 					cat ${ANSIBLE_INVENTORY}
 					apt-get -y install ansible
