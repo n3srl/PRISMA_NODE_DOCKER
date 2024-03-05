@@ -31,34 +31,34 @@ node('docker') {
 			"""
 			
 			sh """
-					apt-get update
-					apt-get -y install systemctl openvpn 
+					sudo apt-get update
+					sudo apt-get -y install systemctl openvpn 
 					
 					if [ ! -d "/etc/openvpn" ]; then
-					mkdir /etc/openvpn
+					sudo mkdir /etc/openvpn
 					fi
 			"""
 				
                 sh """
-					cat << '#DELIMITER' > /etc/openvpn/openvpn.conf
+					sudo cat << '#DELIMITER' > /etc/openvpn/openvpn.conf
 					${OPENVPN_CONF_CONTENT}
 					#DELIMITER
 				"""
 				
 				sh """
-					echo "log-append /var/log/openvpn.log" >> /etc/openvpn/openvpn.conf
+					sudo echo "log-append /var/log/openvpn.log" >> /etc/openvpn/openvpn.conf
 					
-					systemctl enable --now openvpn
+					sudo systemctl enable --now openvpn
 					
-                    systemctl daemon-reload
+                    sudo systemctl daemon-reload
 					
-					systemctl status openvpn
+					sudo systemctl status openvpn
 					
 					sleep 5
 					
 						
 					if [ -d "/etc/openvpn/openvpn.log" ]; then
-					cat /var/log/openvpn.log
+					sudo cat /var/log/openvpn.log
 					fi
 					
 					ip addr
