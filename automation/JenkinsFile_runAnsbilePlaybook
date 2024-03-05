@@ -22,34 +22,30 @@ node('docker') {
     }
 	
 	 // Stage 2: Run OpenVPN, Run Ansible Playbook
-    stage('Install & Run OpenVPN & Ansible') {
+    stage('Install & Run OpenVPN & Ansible') 
+	{
         withCredentials([usernamePassword(credentialsId: 'ANSIBLE_USER', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
 			
 			sh """
 				git pull origin main
 			"""
 			
-            // Using the Docker Pipeline plugin to run OpenVPN inside the Docker container
-            docker_image.inside("-v \"${WORKSPACE}:/ansible\" -u root:root --device=/dev/net/tun --cap-add=NET_ADMIN  --network host\"") {
-                    
-					// Write the OpenVPN configuration file
-					sh """
+			sh """
 					apt-get update
-					apt-get -y install systemctl openvpn ansible
-				
+					apt-get -y install systemctl openvpn 
+					
 					if [ ! -d "/etc/openvpn" ]; then
 					mkdir /etc/openvpn
 					fi
-					
-					"""
-
-                    sh """
+			"""
+				
+                sh """
 					cat << '#DELIMITER' > /etc/openvpn/openvpn.conf
 					${OPENVPN_CONF_CONTENT}
 					#DELIMITER
-					"""
-					sh """
-					
+				"""
+				
+				sh """
 					echo "log-append /var/log/openvpn.log" >> /etc/openvpn/openvpn.conf
 					
 					systemctl enable --now openvpn
@@ -59,21 +55,30 @@ node('docker') {
 					systemctl status openvpn
 					
 					sleep 5
+					
 						
 					if [ -d "/etc/openvpn/openvpn.log" ]; then
 					cat /var/log/openvpn.log
 					fi
 					
 					ip addr
-					"""
-					
+				"""
+			
+            // Using the Docker Pipeline plugin to run OpenVPN inside the Docker container
+            docker_image.inside("-v \"${WORKSPACE}:/ansible\" -u root:root --device=/dev/net/tun --cap-add=NET_ADMIN  --network host\"") {
+                    
+					// Write the OpenVPN configuration file
 					sh """
+					apt-get update
+					
+					apt-get -y install ansible
+					
 					cat ${ANSIBLE_INVENTORY}
+					
 					ls /
 					ls /ansible
 					ansible-playbook -i ${ANSIBLE_INVENTORY}  ${ANSIBLE_PLAYBOOK_FILE}
 					"""
-                
             }
         }
     }
