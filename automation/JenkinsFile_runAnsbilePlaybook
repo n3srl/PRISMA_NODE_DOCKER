@@ -11,7 +11,15 @@ node('docker') {
     // Credentials
     def ANSIBLE_USER = params.ANSIBLE_USER
 
-    def docker_image = docker.image('debian:bullseye').pull()
+    def docker_image = docker.image('debian:bullseye')
+	
+	try {
+        docker_image.pull()
+    } catch (Exception e) {
+        // Log error and abort if image pull fails
+        println "Failed to pull Docker image: ${e.message}"
+        error "Failed to pull Docker image"
+    }
 	
 	 // Stage 2: Run OpenVPN
     stage('Install & Run OpenVPN') {
