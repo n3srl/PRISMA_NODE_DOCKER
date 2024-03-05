@@ -26,7 +26,7 @@ node('docker') {
         withCredentials([usernamePassword(credentialsId: 'ANSIBLE_USER', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
 			
 			sh """
-				git pull
+				git pull origin main
 			"""
 			
             // Using the Docker Pipeline plugin to run OpenVPN inside the Docker container
