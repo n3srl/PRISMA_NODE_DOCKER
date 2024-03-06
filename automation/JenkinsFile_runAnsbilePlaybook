@@ -51,9 +51,11 @@ node('docker') {
 					ls /ansible
 
 					cat ${ANSIBLE_INVENTORY}
-					
-					sshpass -p ${PASSWORD} ansible-playbook -i ${ANSIBLE_INVENTORY} ${ANSIBLE_PLAYBOOK_FILE}  --user ${USERNAME} --ask-pass --extra-vars "ansible_ssh_common_args='-o StrictHostKeyChecking=no'"
 					"""
+					
+					sh """
+					sshpass -p ${PASSWORD} ansible-playbook -i ${ANSIBLE_INVENTORY} ${ANSIBLE_PLAYBOOK_FILE}  --user ${USERNAME} --ask-pass --extra-vars "ansible_ssh_common_args='-o StrictHostKeyChecking=no'"
+					""", returnStatus: true
             }
         }
     }
