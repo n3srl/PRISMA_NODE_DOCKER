@@ -52,7 +52,7 @@ node('docker') {
 					
 					ls /
 					ls /ansible
-					ansible-playbook -i ${ANSIBLE_INVENTORY}  ${ANSIBLE_PLAYBOOK_FILE}
+					sshpass -p ${PASSWORD} ansible-playbook -i ${ANSIBLE_INVENTORY} ${ANSIBLE_PLAYBOOK_FILE}  --user ${USERNAME} --ask-pass
 					"""
             }
         }

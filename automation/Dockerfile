@@ -22,7 +22,7 @@ RUN systemctl daemon-reload
 RUN systemctl status openvpn || echo 'suppress errors'
 
 #install ansible
-RUN apt-get -y install ansible
+RUN apt-get -y install ansible sshpass
 
 RUN echo "test"
 #clear space
