@@ -1,12 +1,4 @@
 ---
-- name: Initialize empty target_nodes group
-  hosts: all
-  gather_facts: no
-  tasks:
-    - name: Create empty target_nodes group
-      group_by:
-        key: target_nodes
-        
 - name: Check SSH availability on guest_nodes
   hosts: guest_nodes
   gather_facts: no
