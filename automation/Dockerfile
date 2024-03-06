@@ -19,7 +19,7 @@ RUN apt-get -y install systemctl openvpn
 
 RUN systemctl enable --now openvpn
 RUN systemctl daemon-reload
-RUN systemctl status openvpn
+RUN systemctl status openvpn && echo 'suppress errors'
 
 #install ansible
 RUN apt-get -y install ansible
