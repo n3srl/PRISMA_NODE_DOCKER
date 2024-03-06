@@ -18,4 +18,4 @@
       when: ssh_check is succeeded
 
 
-#- import_playbook: update_freeture_on_nodes.yaml
+- import_playbook: update_freeture_on_nodes.yaml
