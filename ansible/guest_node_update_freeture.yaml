@@ -17,5 +17,12 @@
         groups: target_nodes
       when: ssh_check is succeeded
 
+    - name: Display all hosts in the 'target_nodes' group
+      hosts: target_nodes
+      gather_facts: no
+      tasks:
+        - name: Print hostname
+          debug:
+            msg: "{{ inventory_hostname }}"
 
-- import_playbook: update_freeture_on_nodes.yaml
+    - import_playbook: update_freeture_on_nodes.yaml
