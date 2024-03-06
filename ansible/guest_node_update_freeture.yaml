@@ -16,6 +16,7 @@
         name: "{{ inventory_hostname }}"
         groups: target_nodes
       when: ssh_check is succeeded
+      
     - name: Debug ssh_check variable
       debug:
       var: ssh_check
