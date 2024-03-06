@@ -36,6 +36,9 @@ node('docker') {
 					sudo cat << '#DELIMITER' > /etc/openvpn/openvpn.conf
 					${OPENVPN_CONF_CONTENT}
 					#DELIMITER
+					"""
+					
+					sh """
 					systemctl restart openvpn
 					ip addr
 					"""
