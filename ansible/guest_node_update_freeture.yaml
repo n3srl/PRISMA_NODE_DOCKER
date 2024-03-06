@@ -19,7 +19,7 @@
       
     - name: Debug ssh_check variable
       debug:
-      var: ssh_check
+        var: ssh_check
       
 # This marks the end of the first play.
 - name: Display all hosts in the 'target_nodes' group
