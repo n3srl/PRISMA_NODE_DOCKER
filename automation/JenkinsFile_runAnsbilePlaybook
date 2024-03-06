@@ -1,7 +1,7 @@
 node('docker') {
     // Parameters
-    def ANSIBLE_PLAYBOOK_FILE = 'ansible/guest_node_update_freeture.yaml'
-    def ANSIBLE_INVENTORY = 'ansible/inventory.ini'
+    def ANSIBLE_PLAYBOOK_FILE = params.ANSIBLE_PLAYBOOK_FILE;
+    def ANSIBLE_INVENTORY = params.ANSIBLE_INVENTORY;
 	
 	
 	// Load the content of the openvpn.conf file from the secret file parameter
