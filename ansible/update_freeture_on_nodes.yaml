@@ -3,6 +3,13 @@
   hosts: guest_nodes
   become: no
   tasks:
+    - name: Check for SSH on port 22
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 22
+        timeout: 2
+      register: ssh_check
+      
     - name: Move to the SETUP directory
       ansible.builtin.command:
         chdir: /home/prisma/SETUP
