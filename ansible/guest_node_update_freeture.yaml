@@ -11,24 +11,15 @@
       register: ssh_check
       ignore_errors: true
 
-    - name: Extract IP addresses from the output string
-      set_fact:
-        ip_addresses: "{{ ssh_check | regex_findall('\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}') }}"
-
     - name: Add host to target_nodes
       add_host:
         name: "{{ inventory_hostname }}"
-        groups: "target_nodes"
-      loop: "{{ ip_addresses }}"
+        groups: target_nodes
       
-    - name: Debug ssh_check variable
+    - name: Debug target_nodes variable
       debug:
         var: ssh_check
-            
-    - name: Debug ip_addresses variable
-      debug:
-        var: ip_addresses
-      
+ 
 # This marks the end of the first play.
 - name: Display all hosts in the 'target_nodes' group
   hosts: target_nodes
