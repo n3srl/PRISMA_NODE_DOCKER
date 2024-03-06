@@ -16,6 +16,9 @@
         name: "{{ inventory_hostname }}"
         groups: target_nodes
       when: ssh_check is succeeded
+    - name: Debug ssh_check variable
+      debug:
+      var: ssh_check
       
 # This marks the end of the first play.
 - name: Display all hosts in the 'target_nodes' group
