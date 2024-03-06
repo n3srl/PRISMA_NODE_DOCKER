@@ -19,7 +19,6 @@
 
     - name: Display all hosts in the 'target_nodes' group
       hosts: target_nodes
-      gather_facts: no
       tasks:
         - name: Print hostname
           debug:
