@@ -6,7 +6,12 @@ node('docker') {
 			git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch:'main'
 		} 
 		stage('Build image') {
-		   dir("automation"){
+			
+			sh """
+				git pull origin main
+			"""
+			
+		   dir("automation") {
 				def buildArgs = ""
 				if (params.FORCE_REBUILD) {
 					buildArgs = "--no-cache"
