@@ -1,6 +1,6 @@
 ---
 - name: Update Docker containers on specified nodes
-  host: guest_nodes
+  hosts: guest_nodes
   become: no
   tasks:
     - name: Move to the SETUP directory
