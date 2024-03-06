@@ -25,4 +25,4 @@ RUN systemctl status openvpn && echo 'suppress errors'
 RUN apt-get -y install ansible
 
 #clear space
-RUN rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get autoremove -y
+RUN rm -rf /var/lib/apt/lists/* || apt-get clean && apt-get autoremove -y
