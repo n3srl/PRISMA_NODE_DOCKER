@@ -11,10 +11,10 @@
       register: ssh_check
       ignore_errors: true
 
-   - name: Add host to target_nodes
+    - name: Add host to target_nodes
       add_host:
         name: "{{ inventory_hostname }}"
-        groups: "target_nodes"
+        groups: target_nodes
       loop: "{{ ssh_check }}"
       
     - name: Debug ssh_check variable
