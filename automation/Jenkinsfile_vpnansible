@@ -7,10 +7,9 @@ node('docker') {
 		} 
 		stage('Build image') {
 			
-			sh """
-				git pull origin main
-			"""
-			
+   		   cleanWs() // Clean the workspace
+           checkout scm // Checkout from SCM
+				
 		   dir("automation") {
 				def buildArgs = ""
 				if (params.FORCE_REBUILD) {
