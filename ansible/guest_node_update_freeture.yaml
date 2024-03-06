@@ -15,7 +15,7 @@
       add_host:
         name: "{{ item.key }}"
         groups: "target_nodes"      
-      loop: "{{ ssh_check | dict2items }}"
+      with_dict: "{{ ssh_check }}"
       
     - name: Debug ssh_check variable
       debug:
