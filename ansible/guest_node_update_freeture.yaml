@@ -14,8 +14,8 @@
     - name: Add host to target_nodes
       add_host:
         name: "{{ inventory_hostname }}"
-        groups: target_nodes
-      when: ssh_check.failed == false
+        groups: "target_nodes"
+      when: ssh_check.state == "started"
       
     - name: Debug ssh_check variable
       debug:
@@ -30,4 +30,4 @@
       debug:
         msg: "{{ inventory_hostname }}"
 
-#- import_playbook: update_freeture_on_nodes.yaml
+- import_playbook: update_freeture_on_nodes.yaml
