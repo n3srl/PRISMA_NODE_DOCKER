@@ -25,7 +25,7 @@ node('docker') {
     stage('Install & Run OpenVPN & Ansible') 
 	{
         withCredentials([usernamePassword(credentialsId: 'ANSIBLE_USER', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-		
+			
             // Using the Docker Pipeline plugin to run OpenVPN inside the Docker container
             docker_image.inside("-v \"${WORKSPACE}:/ansible\" -u root:root --device=/dev/net/tun --cap-add=NET_ADMIN  --network host\"") {
                     sh """
@@ -44,10 +44,11 @@ node('docker') {
 					
 					// Write the OpenVPN configuration file
 					sh """
-					cat ${ANSIBLE_INVENTORY}
-					
 					ls /
 					ls /ansible
+
+					cat ${ANSIBLE_INVENTORY}
+					
 					sshpass -p ${PASSWORD} ansible-playbook -i ${ANSIBLE_INVENTORY} ${ANSIBLE_PLAYBOOK_FILE}  --user ${USERNAME} --ask-pass --extra-vars "ansible_ssh_common_args='-o StrictHostKeyChecking=no'"
 					"""
             }
