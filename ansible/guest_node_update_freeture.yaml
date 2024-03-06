@@ -22,3 +22,5 @@
         groups: target_node
 
     - include_playbook: update_freeture_on_nodes.yaml
+      vars:
+        target_node: target_node
