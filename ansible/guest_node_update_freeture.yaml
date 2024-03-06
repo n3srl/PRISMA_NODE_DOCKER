@@ -16,23 +16,9 @@
       debug:
         msg: "Hostname is {{ ansible_facts['hostname'] }}"
 
-    - name: Add host to target_nodes
+    - name: Add host to target_node
       add_host:
         name: "{{ inventory_hostname }}"
-        groups: target_nodes
-          
-    - name: Debug ssh_check variable
-      debug:
-        var: ssh_check
+        groups: target_node
 
-      
-# This marks the end of the first play.
-- name: Display all hosts in the 'target_nodes' group
-  hosts: target_nodes
-  gather_facts: no
-  tasks:
-    - name: Print hostname
-      debug:
-        msg: "{{ inventory_hostname }}"
-
-#- import_playbook: update_freeture_on_nodes.yaml
+    - import_playbook: update_freeture_on_nodes.yaml
