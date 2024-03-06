@@ -11,6 +11,9 @@ node('docker') {
     // Credentials
     def ANSIBLE_USER = params.ANSIBLE_USER
 
+
+	checkout scm // Checkout from SCM
+				
     def docker_image = docker.image('n3srl/vpnansible:latest')
 	
 	try {
