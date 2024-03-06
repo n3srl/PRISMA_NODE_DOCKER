@@ -1,7 +1,7 @@
 ---
 - name: Check SSH availability on guest_nodes
   hosts: guest_nodes
-  gather_facts: no
+  gather_facts: yes
   tasks:
     - name: Check for SSH on port 22
       wait_for:
@@ -16,6 +16,7 @@
         name: "{{ inventory_hostname }}"
         groups: "target_nodes"
       when: ssh_check.state == "started"
+      with_items: ssh_check
       
     - name: Debug ssh_check variable
       debug:
