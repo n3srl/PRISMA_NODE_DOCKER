@@ -15,7 +15,7 @@
       add_host:
         name: "{{ inventory_hostname }}"
         groups: target_nodes
-      when: ssh_check is succeeded
+      when: ssh_check.failed == false
       
     - name: Debug ssh_check variable
       debug:
