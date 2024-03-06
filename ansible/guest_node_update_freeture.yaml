@@ -21,4 +21,4 @@
         name: "{{ inventory_hostname }}"
         groups: target_node
 
-    - import_playbook: update_freeture_on_nodes.yaml
+    - include_playbook: update_freeture_on_nodes.yaml
