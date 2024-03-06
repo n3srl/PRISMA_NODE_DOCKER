@@ -30,4 +30,4 @@
       debug:
         msg: "{{ inventory_hostname }}"
 
-- import_playbook: update_freeture_on_nodes.yaml
+#- import_playbook: update_freeture_on_nodes.yaml
