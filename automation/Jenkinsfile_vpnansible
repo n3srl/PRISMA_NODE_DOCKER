@@ -33,8 +33,9 @@ node('docker') {
 		
 		// Add this to remove the workspace
         echo "Cleaning up workspace..."
+		cleanWs()
         deleteDir()
-		
+		 
 	} catch (Exception e) {
         // Handle any failure in the previous stages
         echo "An error occurred: ${e.getMessage()}"
