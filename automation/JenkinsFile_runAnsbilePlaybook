@@ -33,13 +33,16 @@ node('docker') {
             // Using the Docker Pipeline plugin to run OpenVPN inside the Docker container
             docker_image.inside("-v \"${WORKSPACE}:/ansible\" -u root:root --device=/dev/net/tun --cap-add=NET_ADMIN  --network host\"") {
                     sh """
-					sudo cat << '#DELIMITER' > /etc/openvpn/openvpn.conf
+					sudo cat << '#DELIMITER' > /etc/openvpn/client/n3guest.conf
 					${OPENVPN_CONF_CONTENT}
 					#DELIMITER
 					"""
 					
 					sh """
-					systemctl restart openvpn
+					ln -s /lib/systemd/system/openvpn-client@.service /etc/systemd/system/openvpn-client@n3guest.service
+					systemctl enable openvpn-client@n3guest
+					systemctl start openvpn-client@n3guest
+					systemctl status openvpn-client@n3guest
 					ip addr
 					"""
 					
