@@ -16,7 +16,7 @@ RUN echo $TZ > /etc/timezone && \
 
 #install openvpn
 RUN apt-get -y install systemctl openvpn 
-RUN mkdir /etc/openvpn
+
 RUN systemctl enable --now openvpn
 RUN systemctl daemon-reload
 RUN systemctl status openvpn
