@@ -13,10 +13,9 @@
 
     - name: Add host to target_nodes
       add_host:
-        name: "{{ inventory_hostname }}"
-        groups: "target_nodes"
-      when: ssh_check.state == "started"
-      with_items: ssh_check
+        name: "{{ item.key }}"
+        groups: "target_nodes"      
+       loop: "{{ ssh_check | dict2items }}"
       
     - name: Debug ssh_check variable
       debug:
