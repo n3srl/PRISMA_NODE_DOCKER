@@ -7,7 +7,7 @@
       wait_for:
         host: "{{ inventory_hostname }}"
         port: 22
-        timeout: 3
+        timeout: 1
       register: ssh_check
       ignore_errors: true
 
@@ -15,7 +15,7 @@
       add_host:
         name: "{{ inventory_hostname }}"
         groups: target_nodes
-      when: ssh_check is target_nodes
+      when: ssh_check is succeeded
 
 
 #- import_playbook: update_freeture_on_nodes.yaml
