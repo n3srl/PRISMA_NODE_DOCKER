@@ -15,8 +15,7 @@
       add_host:
         name: "{{ inventory_hostname }}"
         groups: target_nodes
-      loop: "{{ ssh_check }}"
-      
+          
     - name: Debug ssh_check variable
       debug:
         var: ssh_check
