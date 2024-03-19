@@ -127,6 +127,7 @@ RUN git clone --branch freeture14 https://github.com/n3srl/freeture.git /usr/loc
 #Build freeture
 WORKDIR /usr/local/freeture-1.4.1/freeture_git/cmake/
 RUN cmake .
+RUN cat config.h
 RUN make 
 RUN make install
 
