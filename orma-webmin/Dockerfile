@@ -21,7 +21,8 @@ RUN docker-php-ext-enable ssh2
 RUN apt-get -y install 	fitspng \
 						zip \
 						ffmpeg \
-						imagemagick
+						imagemagick \
+						git
 
 RUN git clone https://github.com/n3srl/PRISMA_NODE_WEBMIN.git /var/www/html
 
