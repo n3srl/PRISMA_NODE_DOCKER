@@ -10,34 +10,30 @@
         timeout: 2
       register: ssh_check
       
-    - name: Move to the webmin source directory
-      ansible.builtin.command:
-        chdir: /prismadata/orma-src
-        cmd: pwd
-      register: pwd_result
-    - debug:
-        var: pwd_result.stdout
-
     - name: Reset the repository to a specific state
       ansible.builtin.shell: |
         git reset --hard
       args:
         executable: /bin/bash
+        chdir: /prismadata/orma-src 
         
     - name: Fetch latest changes from the main branch
       ansible.builtin.shell: |
         git fetch
       args:
         executable: /bin/bash
+        chdir: /prismadata/orma-src 
         
     - name: Check current branch and switch to main if not on main
       ansible.builtin.shell: |
         git switch main
       args:
         executable: /bin/bash
+        chdir: /prismadata/orma-src 
         
     - name: Pull latest changes from the main branch
       ansible.builtin.shell: |
         git pull
       args:
         executable: /bin/bash
+        chdir: /prismadata/orma-src 
