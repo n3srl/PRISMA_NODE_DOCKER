@@ -1,16 +1,43 @@
 node('docker') {  
-	stage('Clone repository') {
-        git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch:'main'
-    } 
-    stage('Build image') {
-       dir("freeture13"){
-		dockerImage = docker.build("n3srl/freeture13:latest")
-	   }
-    }
-    
-	stage('Push image') {
-        withDockerRegistry([ credentialsId: "n3_docker_hub", url: "" ]) {
-			dockerImage.push()
+    def dockerImage = null
+
+	try {
+		stage('Clone repository') {
+			git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch:'main'
+		} 
+		stage('Build image') {
+		   dir("freeture13"){
+				def buildArgs = ""
+				if (params.FORCE_REBUILD) {
+					buildArgs = "--no-cache"
+				}
+				dockerImage = docker.build("n3srl/freeture13:latest", "${buildArgs} .")
+		   }
+		}
+		
+		stage('Push image') {
+			withDockerRegistry([ credentialsId: "n3_docker_hub", url: "" ]) {
+				dockerImage.push()
+			}
+		}
+		
+		// Cleanup logic to remove Docker images/containers
+        if (dockerImage) {
+            echo "Cleaning up Docker image..."
+            try {
+                sh "docker rmi -f ${dockerImage.id}"
+            } catch (Exception cleanupEx) {
+                echo "Failed to remove Docker image: ${cleanupEx.getMessage()}"
+            }
         }
-    }
+		
+		// Add this to remove the workspace
+        echo "Cleaning up workspace..."
+        deleteDir()
+		
+	} catch (Exception e) {
+        // Handle any failure in the previous stages
+        echo "An error occurred: ${e.getMessage()}"
+		error "Pipeline failed due to an error: ${e.getMessage()}" 
+    } 
 }
