@@ -16,8 +16,8 @@ if [[ -f "${SSH_KEY}" && -f "${SSH_KEY}.pub" ]]; then
         docker volume create orma-src
         docker volume create orma-keys
         
-        echo "Fetching source code from git..."
-        git clone https://github.com/n3srl/PRISMA_NODE_WEBMIN.git ${FILES}/framework-base-php-elle
+        echo "Creating volume folder for orma-webmin sources..."
+        mkdir ${FILES}/framework-base-php-elle
 
         echo "Filling volumes..."
         docker run --rm -i -v ${FILES}/framework-base-php-elle:/src -v orma-src:/dst \

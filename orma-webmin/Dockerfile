@@ -21,4 +21,5 @@ RUN apt-get install --no-install-recommends -y libssh2-1-dev \
     && apt-get install ffmpeg \
     && apt-get install imagemagick
 
+RUN git clone https://github.com/n3srl/PRISMA_NODE_WEBMIN.git /var/www/html
 
