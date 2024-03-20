@@ -18,28 +18,26 @@
     - debug:
         var: pwd_result.stdout
 
-    - name: Fetch latest changes from the remote repository
-      ansible.builtin.git:
-        repo: /prismadata/orma-src
-        fetch: yes
-        
     - name: Reset the repository to a specific state
       ansible.builtin.shell: |
         git reset --hard
       args:
         executable: /bin/bash
         
+    - name: Fetch latest changes from the main branch
+      ansible.builtin.shell: |
+        git fetch
+      args:
+        executable: /bin/bash
+        
     - name: Check current branch and switch to main if not on main
-      ansible.builtin.git:
-        repo: /prismadata/orma-src
-        target: main
-        switch: true
-      register: git_switch_result
-      when: git_switch_result.changed
-      
+      ansible.builtin.shell: |
+        git switch main
+      args:
+        executable: /bin/bash
+        
     - name: Pull latest changes from the main branch
-      ansible.builtin.git:
-        repo: /prismadata/orma-src
-        pull: yes
-      register: git_pull_result
-      when: git_switch_result.changed
+      ansible.builtin.shell: |
+        git pull
+      args:
+        executable: /bin/bash
