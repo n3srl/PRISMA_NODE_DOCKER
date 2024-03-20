@@ -136,8 +136,9 @@ RUN make install
 RUN rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get autoremove -y
 
 WORKDIR /usr/local/freeture-1.4.1/freeture_git/share/
+RUN ls
 #add a configuration files
-COPY ["configuration_PH032.cfg","/usr/local/share/freeture/configuration.cfg"]
+RUN cp configuration_PH032.cfg /usr/local/share/freeture/configuration.cfg
 
 WORKDIR /freeture
 
