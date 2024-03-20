@@ -18,11 +18,17 @@
     - debug:
         var: pwd_result.stdout
 
-    - name: Reset the git repository
+    - name: Fetch latest changes from the remote repository
       ansible.builtin.git:
         repo: /prismadata/orma-src
-        reset: hard
-
+        fetch: yes
+        
+    - name: Reset the repository to a specific state
+      ansible.builtin.shell: |
+        git reset --hard
+      args:
+        executable: /bin/bash
+        
     - name: Check current branch and switch to main if not on main
       ansible.builtin.git:
         repo: /prismadata/orma-src
