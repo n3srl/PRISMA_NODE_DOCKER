@@ -1,9 +1,9 @@
  #!/bin/bash
  du=0
  
- file_path = $1
- start_days = $2
- percentage = $3
+ file_path=$1
+ start_days=$2
+ percentage=$3
 
  current_date=$(date +%s)
  
