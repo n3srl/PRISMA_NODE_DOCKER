@@ -7,7 +7,7 @@ percentage=$3
 
 du=0
 
-function du(){
+function compute_du(){
  disk_usage_command="df -h | grep /dev/nvme0n1p2 | awk -F% '{print \$1}'"
  #echo $disk_usage_command
  df_output=`eval $disk_usage_command`
@@ -20,7 +20,7 @@ fi
 
 
 
-du
+compute_du
 
 echo "Disk usage: $du%"
 
@@ -36,17 +36,26 @@ if [[ $du -gt $percentage ]]; then
 	exit;
  fi
 
- for (( day=$start_days; day>=60; day-- ))
+ for (( days=$start_days; days>=60; days-- ))
  do
-  find_command="find $prismadata_path -type f \( ! -name 'default.bmp'  \)  -ctime +$day -exec rm -f {} \;"
+  current_date=$(date +%s)
+  days_ago=$(($current_date - $days * 86400))
   
-  echo $find_command
-  eval $find_command 
+  find_command="find $prismadata_path -type f \( ! -name 'default.bmp' \) -exec sh -c '
+  file_birth_time=\$(stat -c %W \"\$1\")
+  if [ \"\$file_birth_time\" -lt \"$days_ago\" ]; then
+    echo \"\$1 is older than $days days\"
+  fi
+' {} \;"
 
-  du
+
+  echo $find_command
+  #eval $find_command 
+
+  compute_du
 
   if [[ $du -gt $percentage ]]; then
-   echo "Disk Usage $du% exceded $percentage, removing files of $day days ago."
+   echo "Disk Usage $du% exceded $percentage, removing files of $days days ago."
   else
    echo "Finished removing files" 
    break
