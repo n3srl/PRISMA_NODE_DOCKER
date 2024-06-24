@@ -39,7 +39,7 @@ echo "Station code: $stationcode"
 if [[ $du -gt $percentage ]]; then
  echo "Disk Usage $du% ecceded $percentage%, removing files older than $start_days days ago..."
 
- directories=$(find "$data_path" -mindepth 1 -maxdepth 1 -type d -name "${stationcode}_*" | sort -t_ -k2)
+ directories=$(find "$data_path" -mindepth 1 -maxdepth 1 -type d -name "*_*" | sort -t_ -k2)
  if [[ -z $directories ]]; then
   echo "Nothing to do"
  else
