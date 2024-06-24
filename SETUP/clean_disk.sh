@@ -1,4 +1,5 @@
 #!/bin/bash
+#/home/prisma/clean_disk.sh /prismadata/ITTO12/ 360 80 
 echo "Starting PRISMA clean disk"
 
 prismadata_path=$1
@@ -17,7 +18,6 @@ function compute_du(){
 if [[ -z $percentage ]]; then
   percentage=80
 fi
-
 
 
 compute_du
@@ -40,12 +40,12 @@ if [[ $du -gt $percentage ]]; then
  do
   current_date=$(date +%s)
   days_ago=$(($current_date - $days * 86400))
-  
   find_command="find $prismadata_path -type f \( ! -name 'default.bmp' \) -exec sh -c '
-  file_birth_time=\$(stat -c %W \"\$1\")
-  if [ \"\$file_birth_time\" -lt \"$days_ago\" ]; then
-    echo \"\$1 is older than $days days\"
-  fi
+    echo "Processing file: $1"
+    file_birth_time=\$(stat -c %W \"\$1\")
+    if [ \"\$file_birth_time\" -lt \"$days_ago\" ]; then
+       echo \"\$1 is older than $days days\"
+    fi
 ' {} \;"
 
 
