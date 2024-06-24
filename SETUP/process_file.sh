@@ -28,7 +28,7 @@
   file_birth_time=$(stat -c %W "$file_path")
   
   if [ "$file_birth_time" -lt "$days_ago" ]; then
-	echo "$file_path is older than $days days"
+	echo "$file_path is older than $days days ($file_birth_time < $days_ago) "
   fi
     
   compute_du
