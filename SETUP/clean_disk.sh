@@ -46,7 +46,7 @@ if [[ $du -gt $percentage ]]; then
   for dir in $directories; do
    command="rm -rf $dir"
    echo $command
-   #eval $command 
+   eval $command 
    
    compute_du
    
