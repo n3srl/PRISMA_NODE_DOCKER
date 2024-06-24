@@ -16,6 +16,8 @@ function compute_du()
 
 echo "Starting clean_disk"
 
+stationcode="${data_path##*/}"
+
 if [[ -z $percentage ]]; then
   percentage=80
 fi
@@ -36,10 +38,15 @@ if [[ $du -gt $percentage ]]; then
 	exit;
  fi
 
- find_command="find $data_path -type f \( ! -name 'default.bmp' \) -exec sh -c './process_file.sh' {} $start_days $percentage \;"
+ directories=$(find "$data_path" -mindepth 1 -maxdepth 1 -type d -name '$stationcode_*' | sort -t_ -k2)
+ for dir in $directories; do
+ 
+  command="rm -f $dir"
+   
+  echo $command
+  #eval $command 
 
- echo $find_command
- #eval $find_command 
+ done
 
 else
  echo "Nothing to do"

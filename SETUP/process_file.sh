@@ -29,6 +29,7 @@
   
   if [ "$file_birth_time" -lt "$days_ago" ]; then
 	echo "$file_path is older than $days days ($file_birth_time < $days_ago) "
+	rm -f $file_path
   fi
     
   compute_du
