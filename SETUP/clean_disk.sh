@@ -31,24 +31,28 @@ if [[ $du -gt $percentage ]]; then
  if [[ -z $start_days ]]; then
   start_days=360
  fi
+ 
  if [[ -z  $data_path ]]; then
 	echo "usage: $0 /prismadata/<STATION CODE>/ <Start days> <Percentage> eg. /prismadata/ITLO06/ 360 80"
 	echo "start days: need to be at least 60"
 	exit;
  fi
  
- find_command = "find "$data_path" -mindepth 1 -maxdepth 1 -type d -name '$stationcode_*' | sort -t_ -k2"
-
- directories=$(find_command)
- for dir in $directories; do
  
-  command="rm -f $dir"
-   
-  echo $command
-  #eval $command 
 
- done
-
+ if directories=$(find "$data_path" -mindepth 1 -maxdepth 1 -type d -name "${stationcode}_*" | sort -t_ -k2); then
+    if [ -z "$directories" ]; then
+        echo "Nothing to do"
+    else
+      for dir in $directories; do
+ 
+      command="rm -f $dir"
+       
+      echo $command
+      #eval $command 
+     
+     done
+    fi
 else
  echo "Nothing to do"
 fi
