@@ -1,10 +1,10 @@
 #!/bin/bash
-#/home/user/clean_disk.sh /userdata/ITTO12/ 360 80 
+#/home/user/clean_disk.sh /userdata/ITTO12 360 80 
 
 data_path=$1
 start_days=$2
 percentage=$3
-stationcode="${data_path##*/}"
+stationcode=${data_path##*/}
 du=0
 
 function compute_du()
@@ -36,8 +36,10 @@ if [[ $du -gt $percentage ]]; then
 	echo "start days: need to be at least 60"
 	exit;
  fi
+ 
+ find_command = "find "$data_path" -mindepth 1 -maxdepth 1 -type d -name '$stationcode_*' | sort -t_ -k2"
 
- directories=$(find "$data_path" -mindepth 1 -maxdepth 1 -type d -name '$stationcode_*' | sort -t_ -k2)
+ directories=$(find_command)
  for dir in $directories; do
  
   command="rm -f $dir"
