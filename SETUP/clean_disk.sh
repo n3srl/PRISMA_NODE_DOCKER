@@ -47,7 +47,16 @@ if [[ $du -gt $percentage ]]; then
    command="rm -f $dir"
    echo $command
    #eval $command 
-  done
+   
+   compute_du
+   
+   if [[ $du -gt $percentage ]]; then
+    echo "Disk Usage $du% exceded $percentage%, removing next folder."
+   else
+    echo "Finished removing files" 
+    break
+   fi
+   done
  fi
 else
     echo "Disk usage is within the acceptable range."
