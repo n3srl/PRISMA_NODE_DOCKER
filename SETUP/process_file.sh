@@ -15,6 +15,8 @@
   du=${df_output: -3}
  }
 
+ compute_du
+ 
  echo "Start Days: $1"
  echo "Processing file: $2"
  echo "Disk usage: $du%"
