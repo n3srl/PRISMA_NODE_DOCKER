@@ -4,6 +4,7 @@
 data_path=$1
 start_days=$2
 percentage=$3
+stationcode="${data_path##*/}"
 du=0
 
 function compute_du()
@@ -14,17 +15,15 @@ function compute_du()
  du=${df_output: -3}
 }
 
-echo "Starting clean_disk"
-
-stationcode="${data_path##*/}"
+compute_du
 
 if [[ -z $percentage ]]; then
   percentage=80
 fi
 
-compute_du
-
+echo "Starting $0"
 echo "Disk usage: $du%"
+echo "Station code: $stationcode"
 
 if [[ $du -gt $percentage ]]; then
  echo "Disk Usage $du% ecceded $percentage%, removing files older than $start_days days ago..."
