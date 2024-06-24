@@ -44,7 +44,7 @@ if [[ $du -gt $percentage ]]; then
   echo "Nothing to do"
  else
   for dir in $directories; do
-   command="rm -f $dir"
+   command="rm -rf $dir"
    echo $command
    #eval $command 
    
