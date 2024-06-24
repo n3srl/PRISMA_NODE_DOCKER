@@ -41,7 +41,7 @@ if [[ $du -gt $percentage ]]; then
   current_date=$(date +%s)
   days_ago=$(($current_date - $days * 86400))
   find_command="find $prismadata_path -type f \( ! -name 'default.bmp' \) -exec sh -c '
-    echo "Processing file: $1"
+    echo \"Processing file: \$1\"
     file_birth_time=\$(stat -c %W \"\$1\")
     if [ \"\$file_birth_time\" -lt \"$days_ago\" ]; then
        echo \"\$1 is older than $days days\"
