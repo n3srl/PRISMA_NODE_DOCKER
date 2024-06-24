@@ -7,6 +7,21 @@ percentage=$3
 stationcode=${data_path##*/}
 du=0
 
+if [[ -z  $data_path ]]; then
+	echo "usage: $0 /prismadata/<STATION CODE>/ <Start days> <Percentage> eg. /prismadata/ITLO06/ 360 80"
+	echo "start days: need to be at least 60"
+	exit;
+fi
+
+if [[ -z $start_days ]]; then
+  start_days=360
+fi
+ 
+if [[ -z $percentage ]]; then
+  percentage=80
+fi
+
+
 function compute_du()
 {
  disk_usage_command="df -h | grep /dev/nvme0n1p2 | awk -F% '{print \$1}'"
@@ -16,11 +31,7 @@ function compute_du()
 }
 
 compute_du
-
-if [[ -z $percentage ]]; then
-  percentage=80
-fi
-
+ 
 echo "Starting $0"
 echo "Disk usage: $du%"
 echo "Station code: $stationcode"
@@ -28,31 +39,16 @@ echo "Station code: $stationcode"
 if [[ $du -gt $percentage ]]; then
  echo "Disk Usage $du% ecceded $percentage%, removing files older than $start_days days ago..."
 
- if [[ -z $start_days ]]; then
-  start_days=360
+ directories=$(find "$data_path" -mindepth 1 -maxdepth 1 -type d -name "${stationcode}_*" | sort -t_ -k2)
+ if [[ -z $directories ]]; then
+  echo "Nothing to do"
+ else
+  for dir in $directories; do
+   command="rm -f $dir"
+   echo $command
+   #eval $command 
+  done
  fi
- 
- if [[ -z  $data_path ]]; then
-	echo "usage: $0 /prismadata/<STATION CODE>/ <Start days> <Percentage> eg. /prismadata/ITLO06/ 360 80"
-	echo "start days: need to be at least 60"
-	exit;
- fi
- 
- 
-
- if directories=$(find "$data_path" -mindepth 1 -maxdepth 1 -type d -name "${stationcode}_*" | sort -t_ -k2); then
-    if [ -z "$directories" ]; then
-        echo "Nothing to do"
-    else
-      for dir in $directories; do
- 
-      command="rm -f $dir"
-       
-      echo $command
-      #eval $command 
-     
-     done
-    fi
 else
- echo "Nothing to do"
+    echo "Disk usage is within the acceptable range."
 fi
