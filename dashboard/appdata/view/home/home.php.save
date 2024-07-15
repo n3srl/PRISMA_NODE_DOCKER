@@ -1,0 +1,297 @@
+http://34.77.178.151/<?php
+header("Access-Control-Allow-Origin: http://10.8.0.21/img/done.png");
+?>
+
+<style type="text/css">
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 600px;
+        /* The height is 400 pixels */
+        width: 1280px;
+        /* The width is the width of the web page */
+      }
+    </style>
+
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZHAxTFHd8Zjxh0cQq3kJmoHWrkCH8lPM&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+    
+<script>
+    
+// Initialize and add the map
+function initMap() {
+    
+downloadUrl('/lib/prismaCore/1/station/googleMarkers/XML', function(data) {
+  var json = data.response;
+    
+  var xml_string = JSON.parse(json);
+  
+  parser = new DOMParser();
+  var xml = parser.parseFromString(xml_string,"text/xml");
+  var markers = xml.documentElement.getElementsByTagName('marker');
+  
+  const center = { lat: 45.158358, lng: 9.668492 };
+  
+  // The map, centered at Uluru
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 4,
+    center: center,
+  });
+  
+  Array.prototype.forEach.call(markers, function(markerElem) {
+    var id = markerElem.getAttribute('id');
+    var name = markerElem.getAttribute('name');
+    var type = "";
+    var color = markerElem.getAttribute('color');
+    var point = new google.maps.LatLng(
+        parseFloat(markerElem.getAttribute('lat')),
+        parseFloat(markerElem.getAttribute('lng')));
+
+    var infowincontent = document.createElement('div');
+    var strong = document.createElement('strong');
+    strong.textContent = name
+    infowincontent.appendChild(strong);
+    infowincontent.appendChild(document.createElement('br'));
+
+    var text = document.createElement('text');
+    text.textContent = name
+    infowincontent.appendChild(text);
+    
+    const svgMarker = {
+    path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+    fillColor: color,
+    fillOpacity: 0.6,
+    strokeWeight: 0,
+    rotation: 0,
+    scale: 2,
+    anchor: new google.maps.Point(15, 30),
+    };
+    
+    var marker = new google.maps.Marker({
+      map: map,
+      icon: svgMarker,
+      position: point,
+      label: name
+    });
+    });
+    });
+    
+
+
+}
+
+function downloadUrl(url,callback) {
+ var request = window.ActiveXObject ?
+     new ActiveXObject('Microsoft.XMLHTTP') :
+     new XMLHttpRequest;
+
+ request.onreadystatechange = function() {
+   if (request.readyState == 4) {
+     request.onreadystatechange = doNothing;
+     callback(request, request.status);
+   }
+ };
+
+ request.open('GET', url, true);
+ request.send(null);
+}
+
+function doNothing() {}
+</script>
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3></h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- Calcolo Iva -->
+        <div class="row">
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-calendar-check-o"></i>
+                    </div>
+                    <div class="count" id="eventiSettimana">
+                        <?php
+                        global $db_conn;
+
+                        $date = new DateTime('7 days ago');
+                        $date2 = $date->format('Y-m-d');
+                        $sQuery = "SELECT count(`name`) as total FROM pr_drv_event WHERE datetime > '$date2'";
+                       
+                        $rResultFTotal = mysqli_query($db_conn, $sQuery);
+                        $data=mysqli_fetch_assoc($rResultFTotal);
+                        echo $data["total"];
+                        ?>
+                    </div>
+                    <h3> <?= _('Eventi della settimana');?></h3>
+                    <p><a href="/event/list"  style="color: black"></a></p>
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-calendar-check-o"></i>
+                    </div>
+                    <div class="count" id="detectionSettimana">
+                        <?php
+                        global $db_conn;
+
+                        $date = new DateTime('7 days ago');
+                        $date2 = $date->format('Y-m-d');
+                        $sQuery = "SELECT count(`name`) as total FROM pr_drv_detection WHERE datetime > '$date2'";
+                       
+                        $rResultFTotal = mysqli_query($db_conn, $sQuery);
+                        $data=mysqli_fetch_assoc($rResultFTotal);
+                        echo $data["total"];
+                        ?>
+                    </div>
+                    <h3> <?= _('Detections della settimana');?></h3>
+                    <p><a href="/event/list"  style="color: black"></a></p>
+                </div>
+            </div>
+          
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 col-md-offset-3 col-lg-offset-3">
+                <div class="col-xs-12"><button type='button' class='btn pull-right btn-add-1 col-xs-12' onclick="window.location.href = '/person/edit'" >+ <i class="fa fa-user" style="margin-right: 10px "></i> <?= _('Aggiungi persona');?> </button></div>
+                <div class="col-xs-12"><button type='button' class='btn pull-right btn-add-2 col-xs-12' onclick="window.location.href = '/node/edit'" >+ <i class="fa fa-calendar-o"  style="margin-right: 10px "></i> <?= _('Aggiungi nodo');?> </button></div>
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class='col-md-12 col-sm-12 col-xs-12'>
+                <div class='x_panel'>
+                    <div class='x_title no-padding-lr'>
+                        <div class='clearfix'>
+                            <div class='col-md-6 no-padding-l'>
+                                <h2><?= _('Mappa nodi') ?></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='x_content'>
+                        <div class='col-md-12 col-sm-12 col-xs-12'>
+                            <h5 id="last-detection-description"></h5>
+                        </div>
+
+                        <div class="clearfix">
+                            <div id="map"></div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+
+            <div class='col-md-12 col-sm-12 col-xs-12'>
+                <div class='x_panel'>
+                    <div class='x_title no-padding-lr'>
+                        <div class='clearfix'>
+                            <div class='col-md-6 no-padding-l'>
+                                <h2><?= _('Stato nodi') ?></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='x_content'>
+                        <div class='col-md-12 col-sm-12 col-xs-12'>
+                            <h5 id="last-detection-description"></h5>
+                        </div>
+
+                        <div class='col-md-12 col-sm-12 col-xs-12'>
+                            <div class='col-md-12 col-sm-12 col-xs-12' id='last-detection-preview'>
+                                <?php
+                                global $db_conn;
+
+                                $ipNode = '
+                                function updater(name, ip){
+                                    var img = document.body.appendChild(document.createElement("img"));
+                                    img.loading = "lazy";
+                                    img.onload = function()
+                                    {
+                                        var elem = document.getElementById(name+"div");
+                                        elem.innerHTML = "Online 🟢";
+                                    };
+                                    img.onerror = function()
+                                    {
+                                        var elem = document.getElementById(name+"div");
+                                        elem.innerHTML = "Offline 🔴";
+                                    };
+                                    img.src = "http://"+ip+"/img/done.png";
+                                }
+
+                                function nodeCreator(name, ip){
+                                    var atag = document.createElement("a");
+									atag.href = "http://"+ip+"/";
+                                    atag.style.textDecoration = "none";
+                                    atag.style.color = "#3e3e3e";
+
+                                    var div = document.createElement("button");
+                                    div.className = "btn btn-secondary";
+                                    div.type = "button";
+                                    div.style.height = "70px";
+                                    div.style.width = "100px";
+                                    div.innerHTML = name;
+                                    div.style.margin = "10px";
+
+                                    var text1 = document.createElement("div");
+                                    text1.id = name+"div";
+                                    text1.style.position = "relative";
+                                    text1.style.top = "0px";
+                                    text1.innerHTML = "Waiting 🟠";
+
+                                    atag.appendChild(div);
+                                    div.appendChild(text1);
+                                    document.getElementById("last-detection-preview").appendChild(atag);
+                                }
+                                
+                                function noIpNode(name, ip){
+                                    var atag = document.createElement("a");
+									atag.href = "http://"+ip+"/";
+                                    atag.style.textDecoration = "none";
+                                    atag.style.color = "#3e3e3e";
+
+                                    var div = document.createElement("button");
+                                    div.className = "btn btn-secondary";
+                                    div.type = "button";
+                                    div.style.height = "70px";
+                                    div.style.width = "100px";
+                                    div.innerHTML = name;
+                                    div.style.margin = "10px";
+
+                                    var text1 = document.createElement("div");
+                                    text1.id = name+"div";
+                                    text1.style.position = "relative";
+                                    text1.style.top = "0px";
+                                    text1.innerHTML = "No IP ⚫";
+
+                                    atag.appendChild(div);
+                                    div.appendChild(text1);
+                                    document.getElementById("last-detection-preview").appendChild(atag);
+                                }
+                                
+                                ';
+                                echo '<script>'.$ipNode.'</script>';
+
+                                $sQuery = "SELECT `code`, `IPaddress` FROM pr_node";
+                                $rResultFTotal = mysqli_query($db_conn, $sQuery);
+                                foreach ($rResultFTotal as $node_array) {
+                                        if($node_array["IPaddress"] != ''){
+                                            echo '<script>'.'nodeCreator("'.$node_array["code"].'", "'.$node_array["IPaddress"].'")'.'</script>';
+                                            echo '<script>'.'updater("'.$node_array["code"].'", "'.$node_array["IPaddress"].'")'.'</script>';
+                                        }else{
+                                            echo '<script>'.'noIpNode("'.$node_array["code"].'", "'.$node_array["IPaddress"].'")'.'</script>';
+                                        }
+                                }
+                                ?> 
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+
+            
+
+            
+        </div>
+    </div>
+    <div class="row" style="height: 20px;"></div>
+    <?php
+    include "./view/template/foot.php";
+    ?>

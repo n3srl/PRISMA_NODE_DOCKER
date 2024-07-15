@@ -1,0 +1,4012 @@
+swagger: '2.0'
+info:
+  description: >-
+    Api Document
+  version: 1.0.0
+  title: PrismaCore
+  contact:
+    email: info@n-3.it
+host: www.host.it
+basePath: /lib/PrismaCore/1
+tags: 
+  - name: CALIBRATIONEXECUTIONHISTORY
+    description: CALIBRATIONEXECUTIONHISTORY
+  - name: CAMERA
+    description: CAMERA
+  - name: CONFIGPARAMETERS
+    description: CONFIGPARAMETERS
+  - name: COREPERSON
+    description: COREPERSON
+  - name: DETECTION
+    description: DETECTION
+  - name: EMAILALERT
+    description: EMAILALERT
+  - name: EVENT
+    description: EVENT
+  - name: EVENTEXECUTIONHISTORY
+    description: EVENTEXECUTIONHISTORY
+  - name: LOGPROGRAMFILE
+    description: LOGPROGRAMFILE
+  - name: NODE
+    description: NODE
+  - name: OBSERVEDBY
+    description: OBSERVEDBY
+  - name: REFERTO
+    description: REFERTO
+  - name: REGION
+    description: REGION
+  - name: STATION
+    description: STATION
+  - name: SYSTEMCONFIGURATION
+    description: SYSTEMCONFIGURATION
+schemes: 
+  - https 
+  - http
+paths:
+  /calibrationexecutionhistory:
+    post:
+      tags:
+        - CALIBRATIONEXECUTIONHISTORY
+      summary: Insert CalibrationExecutionHistory
+      description: ''
+      operationId: saveCalibrationExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/CalibrationExecutionHistoryRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CalibrationExecutionHistoryResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - CALIBRATIONEXECUTIONHISTORY
+      summary: Update di CalibrationExecutionHistory
+      description: ''
+      operationId: updateCalibrationExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/CalibrationExecutionHistoryRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CalibrationExecutionHistoryResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - CALIBRATIONEXECUTIONHISTORY
+      summary: Estrazione della lista di CalibrationExecutionHistory
+      description: ''
+      operationId: getListCalibrationExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CalibrationExecutionHistoryListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - CALIBRATIONEXECUTIONHISTORY
+      summary: Delete di CalibrationExecutionHistory
+      description: ''
+      operationId: deleteCalibrationExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/CalibrationExecutionHistoryRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - CALIBRATIONEXECUTIONHISTORY
+      summary: Erase di CalibrationExecutionHistory
+      description: ''
+      operationId: erasedCalibrationExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/CalibrationExecutionHistoryRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CalibrationExecutionHistoryResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /calibrationexecutionhistory/{calibrationexecutionhistoryId}:
+    get:
+      tags:
+        - CALIBRATIONEXECUTIONHISTORY
+      summary: Estrazione di CalibrationExecutionHistory
+      description: ''
+      operationId: getCalibrationExecutionHistory
+      produces:
+        - application/json
+      parameters:
+      - name: "calibrationexecutionhistoryId"
+        in: "path"
+        description: "ID of calibrationexecutionhistory to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CalibrationExecutionHistoryResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /calibrationexecutionhistory/datatable/list:
+    get:
+      tags:
+        - CALIBRATIONEXECUTIONHISTORY
+      summary: Datatable
+      description: ''
+      operationId: getDatatableCalibrationExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /calibrationexecutionhistory/autocomplete/{columnName}:
+    get:
+      tags:
+        - CALIBRATIONEXECUTIONHISTORY
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesCalibrationExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /calibrationexecutionhistory/foreignkey/{columnName}:
+    get:
+      tags:
+        - CALIBRATIONEXECUTIONHISTORY
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesCalibrationExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /camera:
+    post:
+      tags:
+        - CAMERA
+      summary: Insert Camera
+      description: ''
+      operationId: saveCamera
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/CameraRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CameraResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - CAMERA
+      summary: Update di Camera
+      description: ''
+      operationId: updateCamera
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/CameraRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CameraResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - CAMERA
+      summary: Estrazione della lista di Camera
+      description: ''
+      operationId: getListCamera
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CameraListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - CAMERA
+      summary: Delete di Camera
+      description: ''
+      operationId: deleteCamera
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/CameraRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - CAMERA
+      summary: Erase di Camera
+      description: ''
+      operationId: erasedCamera
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/CameraRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CameraResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /camera/{cameraId}:
+    get:
+      tags:
+        - CAMERA
+      summary: Estrazione di Camera
+      description: ''
+      operationId: getCamera
+      produces:
+        - application/json
+      parameters:
+      - name: "cameraId"
+        in: "path"
+        description: "ID of camera to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CameraResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /camera/datatable/list:
+    get:
+      tags:
+        - CAMERA
+      summary: Datatable
+      description: ''
+      operationId: getDatatableCamera
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /camera/autocomplete/{columnName}:
+    get:
+      tags:
+        - CAMERA
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesCamera
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /camera/foreignkey/{columnName}:
+    get:
+      tags:
+        - CAMERA
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesCamera
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /configparameters:
+    post:
+      tags:
+        - CONFIGPARAMETERS
+      summary: Insert ConfigParameters
+      description: ''
+      operationId: saveConfigParameters
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/ConfigParametersRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ConfigParametersResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - CONFIGPARAMETERS
+      summary: Update di ConfigParameters
+      description: ''
+      operationId: updateConfigParameters
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/ConfigParametersRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ConfigParametersResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - CONFIGPARAMETERS
+      summary: Estrazione della lista di ConfigParameters
+      description: ''
+      operationId: getListConfigParameters
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ConfigParametersListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - CONFIGPARAMETERS
+      summary: Delete di ConfigParameters
+      description: ''
+      operationId: deleteConfigParameters
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/ConfigParametersRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - CONFIGPARAMETERS
+      summary: Erase di ConfigParameters
+      description: ''
+      operationId: erasedConfigParameters
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/ConfigParametersRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ConfigParametersResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /configparameters/{configparametersId}:
+    get:
+      tags:
+        - CONFIGPARAMETERS
+      summary: Estrazione di ConfigParameters
+      description: ''
+      operationId: getConfigParameters
+      produces:
+        - application/json
+      parameters:
+      - name: "configparametersId"
+        in: "path"
+        description: "ID of configparameters to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ConfigParametersResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /configparameters/datatable/list:
+    get:
+      tags:
+        - CONFIGPARAMETERS
+      summary: Datatable
+      description: ''
+      operationId: getDatatableConfigParameters
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /configparameters/autocomplete/{columnName}:
+    get:
+      tags:
+        - CONFIGPARAMETERS
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesConfigParameters
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /configparameters/foreignkey/{columnName}:
+    get:
+      tags:
+        - CONFIGPARAMETERS
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesConfigParameters
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /coreperson:
+    post:
+      tags:
+        - COREPERSON
+      summary: Insert CorePerson
+      description: ''
+      operationId: saveCorePerson
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/CorePersonRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CorePersonResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - COREPERSON
+      summary: Update di CorePerson
+      description: ''
+      operationId: updateCorePerson
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/CorePersonRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CorePersonResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - COREPERSON
+      summary: Estrazione della lista di CorePerson
+      description: ''
+      operationId: getListCorePerson
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CorePersonListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - COREPERSON
+      summary: Delete di CorePerson
+      description: ''
+      operationId: deleteCorePerson
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/CorePersonRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - COREPERSON
+      summary: Erase di CorePerson
+      description: ''
+      operationId: erasedCorePerson
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/CorePersonRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CorePersonResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /coreperson/{corepersonId}:
+    get:
+      tags:
+        - COREPERSON
+      summary: Estrazione di CorePerson
+      description: ''
+      operationId: getCorePerson
+      produces:
+        - application/json
+      parameters:
+      - name: "corepersonId"
+        in: "path"
+        description: "ID of coreperson to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/CorePersonResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /coreperson/datatable/list:
+    get:
+      tags:
+        - COREPERSON
+      summary: Datatable
+      description: ''
+      operationId: getDatatableCorePerson
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /coreperson/autocomplete/{columnName}:
+    get:
+      tags:
+        - COREPERSON
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesCorePerson
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /coreperson/foreignkey/{columnName}:
+    get:
+      tags:
+        - COREPERSON
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesCorePerson
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /detection:
+    post:
+      tags:
+        - DETECTION
+      summary: Insert Detection
+      description: ''
+      operationId: saveDetection
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/DetectionRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DetectionResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - DETECTION
+      summary: Update di Detection
+      description: ''
+      operationId: updateDetection
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/DetectionRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DetectionResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - DETECTION
+      summary: Estrazione della lista di Detection
+      description: ''
+      operationId: getListDetection
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DetectionListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - DETECTION
+      summary: Delete di Detection
+      description: ''
+      operationId: deleteDetection
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/DetectionRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - DETECTION
+      summary: Erase di Detection
+      description: ''
+      operationId: erasedDetection
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/DetectionRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DetectionResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /detection/{detectionId}:
+    get:
+      tags:
+        - DETECTION
+      summary: Estrazione di Detection
+      description: ''
+      operationId: getDetection
+      produces:
+        - application/json
+      parameters:
+      - name: "detectionId"
+        in: "path"
+        description: "ID of detection to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DetectionResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /detection/datatable/list:
+    get:
+      tags:
+        - DETECTION
+      summary: Datatable
+      description: ''
+      operationId: getDatatableDetection
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /detection/autocomplete/{columnName}:
+    get:
+      tags:
+        - DETECTION
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesDetection
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /detection/foreignkey/{columnName}:
+    get:
+      tags:
+        - DETECTION
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesDetection
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /emailalert:
+    post:
+      tags:
+        - EMAILALERT
+      summary: Insert EmailAlert
+      description: ''
+      operationId: saveEmailAlert
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/EmailAlertRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EmailAlertResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - EMAILALERT
+      summary: Update di EmailAlert
+      description: ''
+      operationId: updateEmailAlert
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/EmailAlertRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EmailAlertResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - EMAILALERT
+      summary: Estrazione della lista di EmailAlert
+      description: ''
+      operationId: getListEmailAlert
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EmailAlertListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - EMAILALERT
+      summary: Delete di EmailAlert
+      description: ''
+      operationId: deleteEmailAlert
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/EmailAlertRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - EMAILALERT
+      summary: Erase di EmailAlert
+      description: ''
+      operationId: erasedEmailAlert
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/EmailAlertRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EmailAlertResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /emailalert/{emailalertId}:
+    get:
+      tags:
+        - EMAILALERT
+      summary: Estrazione di EmailAlert
+      description: ''
+      operationId: getEmailAlert
+      produces:
+        - application/json
+      parameters:
+      - name: "emailalertId"
+        in: "path"
+        description: "ID of emailalert to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EmailAlertResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /emailalert/datatable/list:
+    get:
+      tags:
+        - EMAILALERT
+      summary: Datatable
+      description: ''
+      operationId: getDatatableEmailAlert
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /emailalert/autocomplete/{columnName}:
+    get:
+      tags:
+        - EMAILALERT
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesEmailAlert
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /emailalert/foreignkey/{columnName}:
+    get:
+      tags:
+        - EMAILALERT
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesEmailAlert
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /event:
+    post:
+      tags:
+        - EVENT
+      summary: Insert Event
+      description: ''
+      operationId: saveEvent
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/EventRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EventResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - EVENT
+      summary: Update di Event
+      description: ''
+      operationId: updateEvent
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/EventRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EventResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - EVENT
+      summary: Estrazione della lista di Event
+      description: ''
+      operationId: getListEvent
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EventListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - EVENT
+      summary: Delete di Event
+      description: ''
+      operationId: deleteEvent
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/EventRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - EVENT
+      summary: Erase di Event
+      description: ''
+      operationId: erasedEvent
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/EventRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EventResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /event/{eventId}:
+    get:
+      tags:
+        - EVENT
+      summary: Estrazione di Event
+      description: ''
+      operationId: getEvent
+      produces:
+        - application/json
+      parameters:
+      - name: "eventId"
+        in: "path"
+        description: "ID of event to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EventResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /event/datatable/list:
+    get:
+      tags:
+        - EVENT
+      summary: Datatable
+      description: ''
+      operationId: getDatatableEvent
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /event/autocomplete/{columnName}:
+    get:
+      tags:
+        - EVENT
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesEvent
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /event/foreignkey/{columnName}:
+    get:
+      tags:
+        - EVENT
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesEvent
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /eventexecutionhistory:
+    post:
+      tags:
+        - EVENTEXECUTIONHISTORY
+      summary: Insert EventExecutionHistory
+      description: ''
+      operationId: saveEventExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/EventExecutionHistoryRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EventExecutionHistoryResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - EVENTEXECUTIONHISTORY
+      summary: Update di EventExecutionHistory
+      description: ''
+      operationId: updateEventExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/EventExecutionHistoryRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EventExecutionHistoryResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - EVENTEXECUTIONHISTORY
+      summary: Estrazione della lista di EventExecutionHistory
+      description: ''
+      operationId: getListEventExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EventExecutionHistoryListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - EVENTEXECUTIONHISTORY
+      summary: Delete di EventExecutionHistory
+      description: ''
+      operationId: deleteEventExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/EventExecutionHistoryRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - EVENTEXECUTIONHISTORY
+      summary: Erase di EventExecutionHistory
+      description: ''
+      operationId: erasedEventExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/EventExecutionHistoryRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EventExecutionHistoryResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /eventexecutionhistory/{eventexecutionhistoryId}:
+    get:
+      tags:
+        - EVENTEXECUTIONHISTORY
+      summary: Estrazione di EventExecutionHistory
+      description: ''
+      operationId: getEventExecutionHistory
+      produces:
+        - application/json
+      parameters:
+      - name: "eventexecutionhistoryId"
+        in: "path"
+        description: "ID of eventexecutionhistory to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/EventExecutionHistoryResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /eventexecutionhistory/datatable/list:
+    get:
+      tags:
+        - EVENTEXECUTIONHISTORY
+      summary: Datatable
+      description: ''
+      operationId: getDatatableEventExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /eventexecutionhistory/autocomplete/{columnName}:
+    get:
+      tags:
+        - EVENTEXECUTIONHISTORY
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesEventExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /eventexecutionhistory/foreignkey/{columnName}:
+    get:
+      tags:
+        - EVENTEXECUTIONHISTORY
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesEventExecutionHistory
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /logprogramfile:
+    post:
+      tags:
+        - LOGPROGRAMFILE
+      summary: Insert LogProgramFile
+      description: ''
+      operationId: saveLogProgramFile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/LogProgramFileRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/LogProgramFileResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - LOGPROGRAMFILE
+      summary: Update di LogProgramFile
+      description: ''
+      operationId: updateLogProgramFile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/LogProgramFileRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/LogProgramFileResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - LOGPROGRAMFILE
+      summary: Estrazione della lista di LogProgramFile
+      description: ''
+      operationId: getListLogProgramFile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/LogProgramFileListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - LOGPROGRAMFILE
+      summary: Delete di LogProgramFile
+      description: ''
+      operationId: deleteLogProgramFile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/LogProgramFileRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - LOGPROGRAMFILE
+      summary: Erase di LogProgramFile
+      description: ''
+      operationId: erasedLogProgramFile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/LogProgramFileRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/LogProgramFileResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /logprogramfile/{logprogramfileId}:
+    get:
+      tags:
+        - LOGPROGRAMFILE
+      summary: Estrazione di LogProgramFile
+      description: ''
+      operationId: getLogProgramFile
+      produces:
+        - application/json
+      parameters:
+      - name: "logprogramfileId"
+        in: "path"
+        description: "ID of logprogramfile to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/LogProgramFileResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /logprogramfile/datatable/list:
+    get:
+      tags:
+        - LOGPROGRAMFILE
+      summary: Datatable
+      description: ''
+      operationId: getDatatableLogProgramFile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /logprogramfile/autocomplete/{columnName}:
+    get:
+      tags:
+        - LOGPROGRAMFILE
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesLogProgramFile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /logprogramfile/foreignkey/{columnName}:
+    get:
+      tags:
+        - LOGPROGRAMFILE
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesLogProgramFile
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /node:
+    post:
+      tags:
+        - NODE
+      summary: Insert Node
+      description: ''
+      operationId: saveNode
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/NodeRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/NodeResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - NODE
+      summary: Update di Node
+      description: ''
+      operationId: updateNode
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/NodeRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/NodeResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - NODE
+      summary: Estrazione della lista di Node
+      description: ''
+      operationId: getListNode
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/NodeListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - NODE
+      summary: Delete di Node
+      description: ''
+      operationId: deleteNode
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/NodeRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - NODE
+      summary: Erase di Node
+      description: ''
+      operationId: erasedNode
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/NodeRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/NodeResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /node/{nodeId}:
+    get:
+      tags:
+        - NODE
+      summary: Estrazione di Node
+      description: ''
+      operationId: getNode
+      produces:
+        - application/json
+      parameters:
+      - name: "nodeId"
+        in: "path"
+        description: "ID of node to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/NodeResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /node/datatable/list:
+    get:
+      tags:
+        - NODE
+      summary: Datatable
+      description: ''
+      operationId: getDatatableNode
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /node/autocomplete/{columnName}:
+    get:
+      tags:
+        - NODE
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesNode
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /node/foreignkey/{columnName}:
+    get:
+      tags:
+        - NODE
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesNode
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /observedby:
+    post:
+      tags:
+        - OBSERVEDBY
+      summary: Insert ObservedBy
+      description: ''
+      operationId: saveObservedBy
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/ObservedByRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ObservedByResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - OBSERVEDBY
+      summary: Update di ObservedBy
+      description: ''
+      operationId: updateObservedBy
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/ObservedByRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ObservedByResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - OBSERVEDBY
+      summary: Estrazione della lista di ObservedBy
+      description: ''
+      operationId: getListObservedBy
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ObservedByListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - OBSERVEDBY
+      summary: Delete di ObservedBy
+      description: ''
+      operationId: deleteObservedBy
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/ObservedByRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - OBSERVEDBY
+      summary: Erase di ObservedBy
+      description: ''
+      operationId: erasedObservedBy
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/ObservedByRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ObservedByResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /observedby/{observedbyId}:
+    get:
+      tags:
+        - OBSERVEDBY
+      summary: Estrazione di ObservedBy
+      description: ''
+      operationId: getObservedBy
+      produces:
+        - application/json
+      parameters:
+      - name: "observedbyId"
+        in: "path"
+        description: "ID of observedby to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ObservedByResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /observedby/datatable/list:
+    get:
+      tags:
+        - OBSERVEDBY
+      summary: Datatable
+      description: ''
+      operationId: getDatatableObservedBy
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /observedby/autocomplete/{columnName}:
+    get:
+      tags:
+        - OBSERVEDBY
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesObservedBy
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /observedby/foreignkey/{columnName}:
+    get:
+      tags:
+        - OBSERVEDBY
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesObservedBy
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /referto:
+    post:
+      tags:
+        - REFERTO
+      summary: Insert ReferTo
+      description: ''
+      operationId: saveReferTo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/ReferToRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ReferToResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - REFERTO
+      summary: Update di ReferTo
+      description: ''
+      operationId: updateReferTo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/ReferToRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ReferToResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - REFERTO
+      summary: Estrazione della lista di ReferTo
+      description: ''
+      operationId: getListReferTo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ReferToListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - REFERTO
+      summary: Delete di ReferTo
+      description: ''
+      operationId: deleteReferTo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/ReferToRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - REFERTO
+      summary: Erase di ReferTo
+      description: ''
+      operationId: erasedReferTo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/ReferToRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ReferToResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /referto/{refertoId}:
+    get:
+      tags:
+        - REFERTO
+      summary: Estrazione di ReferTo
+      description: ''
+      operationId: getReferTo
+      produces:
+        - application/json
+      parameters:
+      - name: "refertoId"
+        in: "path"
+        description: "ID of referto to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/ReferToResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /referto/datatable/list:
+    get:
+      tags:
+        - REFERTO
+      summary: Datatable
+      description: ''
+      operationId: getDatatableReferTo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /referto/autocomplete/{columnName}:
+    get:
+      tags:
+        - REFERTO
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesReferTo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /referto/foreignkey/{columnName}:
+    get:
+      tags:
+        - REFERTO
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesReferTo
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /region:
+    post:
+      tags:
+        - REGION
+      summary: Insert Region
+      description: ''
+      operationId: saveRegion
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/RegionRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/RegionResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - REGION
+      summary: Update di Region
+      description: ''
+      operationId: updateRegion
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/RegionRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/RegionResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - REGION
+      summary: Estrazione della lista di Region
+      description: ''
+      operationId: getListRegion
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/RegionListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - REGION
+      summary: Delete di Region
+      description: ''
+      operationId: deleteRegion
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/RegionRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - REGION
+      summary: Erase di Region
+      description: ''
+      operationId: erasedRegion
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/RegionRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/RegionResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /region/{regionId}:
+    get:
+      tags:
+        - REGION
+      summary: Estrazione di Region
+      description: ''
+      operationId: getRegion
+      produces:
+        - application/json
+      parameters:
+      - name: "regionId"
+        in: "path"
+        description: "ID of region to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/RegionResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /region/datatable/list:
+    get:
+      tags:
+        - REGION
+      summary: Datatable
+      description: ''
+      operationId: getDatatableRegion
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /region/autocomplete/{columnName}:
+    get:
+      tags:
+        - REGION
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesRegion
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /region/foreignkey/{columnName}:
+    get:
+      tags:
+        - REGION
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesRegion
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /station:
+    post:
+      tags:
+        - STATION
+      summary: Insert Station
+      description: ''
+      operationId: saveStation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/StationRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/StationResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - STATION
+      summary: Update di Station
+      description: ''
+      operationId: updateStation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/StationRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/StationResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - STATION
+      summary: Estrazione della lista di Station
+      description: ''
+      operationId: getListStation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/StationListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - STATION
+      summary: Delete di Station
+      description: ''
+      operationId: deleteStation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/StationRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - STATION
+      summary: Erase di Station
+      description: ''
+      operationId: erasedStation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/StationRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/StationResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /station/{stationId}:
+    get:
+      tags:
+        - STATION
+      summary: Estrazione di Station
+      description: ''
+      operationId: getStation
+      produces:
+        - application/json
+      parameters:
+      - name: "stationId"
+        in: "path"
+        description: "ID of station to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/StationResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /station/datatable/list:
+    get:
+      tags:
+        - STATION
+      summary: Datatable
+      description: ''
+      operationId: getDatatableStation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /station/autocomplete/{columnName}:
+    get:
+      tags:
+        - STATION
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesStation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /station/foreignkey/{columnName}:
+    get:
+      tags:
+        - STATION
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesStation
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /systemconfiguration:
+    post:
+      tags:
+        - SYSTEMCONFIGURATION
+      summary: Insert SystemConfiguration
+      description: ''
+      operationId: saveSystemConfiguration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/SystemConfigurationRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/SystemConfigurationResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    put:
+      tags:
+        - SYSTEMCONFIGURATION
+      summary: Update di SystemConfiguration
+      description: ''
+      operationId: updateSystemConfiguration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/SystemConfigurationRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/SystemConfigurationResponse'
+        '403':
+            description: Errore
+            schema:
+              $ref: '#/definitions/ErrorResponse'
+    get:
+      tags:
+        - SYSTEMCONFIGURATION
+      summary: Estrazione della lista di SystemConfiguration
+      description: ''
+      operationId: getListSystemConfiguration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/SystemConfigurationListResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    delete:
+      tags:
+        - SYSTEMCONFIGURATION
+      summary: Delete di SystemConfiguration
+      description: ''
+      operationId: deleteSystemConfiguration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/SystemConfigurationRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/GenericResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    patch:
+      tags:
+        - SYSTEMCONFIGURATION
+      summary: Erase di SystemConfiguration
+      description: ''
+      operationId: erasedSystemConfiguration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: data
+          required: true
+          schema:
+            $ref: '#/definitions/SystemConfigurationRequest'
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/SystemConfigurationResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /systemconfiguration/{systemconfigurationId}:
+    get:
+      tags:
+        - SYSTEMCONFIGURATION
+      summary: Estrazione di SystemConfiguration
+      description: ''
+      operationId: getSystemConfiguration
+      produces:
+        - application/json
+      parameters:
+      - name: "systemconfigurationId"
+        in: "path"
+        description: "ID of systemconfiguration to return "
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/SystemConfigurationResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /systemconfiguration/datatable/list:
+    get:
+      tags:
+        - SYSTEMCONFIGURATION
+      summary: Datatable
+      description: ''
+      operationId: getDatatableSystemConfiguration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/DatatableResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /systemconfiguration/autocomplete/{columnName}:
+    get:
+      tags:
+        - SYSTEMCONFIGURATION
+      summary: Autocomplete
+      description: ''
+      operationId: getAutocompleteValuesSystemConfiguration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /systemconfiguration/foreignkey/{columnName}:
+    get:
+      tags:
+        - SYSTEMCONFIGURATION
+      summary: Autocomplete
+      description: ''
+      operationId: getForeignKeyValuesSystemConfiguration
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      - name: columnName
+        in: "path"
+        description: Name of the DB column to get value list
+        required: true
+        type: "string"
+      responses:
+        '200':
+          description: Operazione riuscita
+          schema:
+            $ref: '#/definitions/AutocompleteResponse'
+        '403':
+          description: Errore
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+definitions:
+  #Response Object 
+  GenericResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+  #Datatable Object 
+  DatatableResponse:
+    type: object
+    properties:
+      aaData:
+        type: array
+        items:
+          type: array
+          items:
+            type: object
+      iTotalDisplayRecords:
+        type: string
+      iTotalRecords:
+        type: string
+      sEcho:
+        type: number
+  #Autocomplete Object 
+  AutocompleteResponse:
+    type: object
+    properties:
+      results:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            text:
+              type: string
+  ErrorResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      message:
+        type: string
+      code:
+        type: string
+  CalibrationExecutionHistoryResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/CalibrationExecutionHistory"
+  CalibrationExecutionHistoryListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/CalibrationExecutionHistoryList"
+  CameraResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/Camera"
+  CameraListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/CameraList"
+  ConfigParametersResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/ConfigParameters"
+  ConfigParametersListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/ConfigParametersList"
+  CorePersonResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/CorePerson"
+  CorePersonListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/CorePersonList"
+  DetectionResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/Detection"
+  DetectionListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/DetectionList"
+  EmailAlertResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/EmailAlert"
+  EmailAlertListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/EmailAlertList"
+  EventResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/Event"
+  EventListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/EventList"
+  EventExecutionHistoryResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/EventExecutionHistory"
+  EventExecutionHistoryListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/EventExecutionHistoryList"
+  LogProgramFileResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/LogProgramFile"
+  LogProgramFileListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/LogProgramFileList"
+  NodeResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/Node"
+  NodeListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/NodeList"
+  ObservedByResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/ObservedBy"
+  ObservedByListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/ObservedByList"
+  ReferToResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/ReferTo"
+  ReferToListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/ReferToList"
+  RegionResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/Region"
+  RegionListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/RegionList"
+  StationResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/Station"
+  StationListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/StationList"
+  SystemConfigurationResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/SystemConfiguration"
+  SystemConfigurationListResponse:
+    type: object
+    properties:
+      result:
+        type: boolean
+      data:
+        $ref: "#/definitions/SystemConfigurationList"
+#Aggregate Object
+  CalibrationExecutionHistoryList:
+    type: array 
+    items:
+      $ref: "#/definitions/CalibrationExecutionHistory"
+  CalibrationExecutionHistoryRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/CalibrationExecutionHistory"
+  CameraList:
+    type: array 
+    items:
+      $ref: "#/definitions/Camera"
+  CameraRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/Camera"
+  ConfigParametersList:
+    type: array 
+    items:
+      $ref: "#/definitions/ConfigParameters"
+  ConfigParametersRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/ConfigParameters"
+  CorePersonList:
+    type: array 
+    items:
+      $ref: "#/definitions/CorePerson"
+  CorePersonRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/CorePerson"
+  DetectionList:
+    type: array 
+    items:
+      $ref: "#/definitions/Detection"
+  DetectionRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/Detection"
+  EmailAlertList:
+    type: array 
+    items:
+      $ref: "#/definitions/EmailAlert"
+  EmailAlertRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/EmailAlert"
+  EventList:
+    type: array 
+    items:
+      $ref: "#/definitions/Event"
+  EventRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/Event"
+  EventExecutionHistoryList:
+    type: array 
+    items:
+      $ref: "#/definitions/EventExecutionHistory"
+  EventExecutionHistoryRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/EventExecutionHistory"
+  LogProgramFileList:
+    type: array 
+    items:
+      $ref: "#/definitions/LogProgramFile"
+  LogProgramFileRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/LogProgramFile"
+  NodeList:
+    type: array 
+    items:
+      $ref: "#/definitions/Node"
+  NodeRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/Node"
+  ObservedByList:
+    type: array 
+    items:
+      $ref: "#/definitions/ObservedBy"
+  ObservedByRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/ObservedBy"
+  ReferToList:
+    type: array 
+    items:
+      $ref: "#/definitions/ReferTo"
+  ReferToRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/ReferTo"
+  RegionList:
+    type: array 
+    items:
+      $ref: "#/definitions/Region"
+  RegionRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/Region"
+  StationList:
+    type: array 
+    items:
+      $ref: "#/definitions/Station"
+  StationRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/Station"
+  SystemConfigurationList:
+    type: array 
+    items:
+      $ref: "#/definitions/SystemConfiguration"
+  SystemConfigurationRequest:
+    type: object
+    properties:
+      token:
+        type: string
+      data:
+        $ref: "#/definitions/SystemConfiguration"
+  #Class Object
+  CalibrationExecutionHistory:
+    type: object
+    properties:
+      id: 
+        type: number
+      oid: 
+        type: string
+      camera_id: 
+        type: number
+      date: 
+        type: number
+      execution_datetime: 
+        type: string
+      monthly_or_daily: 
+        type: boolean
+      config_parameters: 
+        type: string
+      stdout: 
+        type: string
+      stderr: 
+        type: string
+  Camera:
+    type: object
+    properties:
+      id: 
+        type: number
+      oid: 
+        type: string
+      node_id: 
+        type: number
+      code: 
+        type: string
+      config_file: 
+        type: string
+      mask_file: 
+        type: string
+      model: 
+        type: string
+  ConfigParameters:
+    type: object
+    properties:
+      id: 
+        type: number
+      oid: 
+        type: string
+      general_quiet: 
+        type: boolean
+      general_on_error: 
+        type: boolean
+      general_except: 
+        type: boolean
+      image_report_photo: 
+        type: string
+      daily_report_astro: 
+        type: string
+      daily_histo: 
+        type: string
+      monthly_report_astro: 
+        type: string
+      monthly_histo: 
+        type: string
+      event_fill_frames: 
+        type: string
+      event_recenter: 
+        type: string
+      event_box_bolide: 
+        type: number
+      event_model_psf: 
+        type: string
+      event_model_bar: 
+        type: string
+      event_report: 
+        type: string
+      event_image: 
+        type: string
+      event_video: 
+        type: string
+  CorePerson:
+    type: object
+    properties:
+      id: 
+        type: number
+      oid: 
+        type: string
+      username: 
+        type: string
+      password: 
+        type: string
+      email: 
+        type: string
+      title: 
+        type: string
+      first_name: 
+        type: string
+      middle_name: 
+        type: string
+      last_name: 
+        type: string
+      suffix: 
+        type: string
+      company: 
+        type: string
+      job_title: 
+        type: string
+      web_page_address: 
+        type: string
+      im_address: 
+        type: string
+      phone: 
+        type: string
+      address: 
+        type: string
+      postcode: 
+        type: string
+      number: 
+        type: string
+      city: 
+        type: string
+      province: 
+        type: string
+      country: 
+        type: string
+      timezone: 
+        type: string
+      is_station_referer: 
+        type: boolean
+      is_administrator: 
+        type: boolean
+  Detection:
+    type: object
+    properties:
+      id: 
+        type: number
+      oid: 
+        type: string
+      node_id: 
+        type: number
+      event_id: 
+        type: number
+      inserted_timestamp: 
+        type: string
+      detected_timestamp: 
+        type: string
+      is_fake: 
+        type: boolean
+  EmailAlert:
+    type: object
+    properties:
+      id: 
+        type: number
+      event_id: 
+        type: number
+      core_person_id: 
+        type: number
+  Event:
+    type: object
+    properties:
+      id: 
+        type: number
+      oid: 
+        type: string
+      code: 
+        type: string
+      to_process: 
+        type: boolean
+  EventExecutionHistory:
+    type: object
+    properties:
+      id: 
+        type: number
+      oid: 
+        type: string
+      event_id: 
+        type: number
+      execution_datetime: 
+        type: string
+      config_parameters: 
+        type: string
+      stdout: 
+        type: string
+      stderr: 
+        type: string
+  LogProgramFile:
+    type: object
+    properties:
+      id: 
+        type: number
+      oid: 
+        type: string
+      timestamp: 
+        type: string
+      type: 
+        type: string
+      level: 
+        type: number
+      text: 
+        type: string
+  Node:
+    type: object
+    properties:
+      id: 
+        type: number
+      oid: 
+        type: string
+      station_id: 
+        type: number
+      MAC_address: 
+        type: string
+      hostname: 
+        type: string
+      CName: 
+        type: string
+      freeture_configuration_file: 
+        type: string
+      ovpnfile: 
+        type: string
+      interval_running_DEA: 
+        type: number
+      relative_path: 
+        type: string
+  ObservedBy:
+    type: object
+    properties:
+      id: 
+        type: number
+      event_id: 
+        type: number
+      detection_id: 
+        type: number
+  ReferTo:
+    type: object
+    properties:
+      id: 
+        type: number
+      core_person_id: 
+        type: number
+      station_id: 
+        type: number
+  Region:
+    type: object
+    properties:
+      id: 
+        type: number
+      oid: 
+        type: string
+      state: 
+        type: string
+      code: 
+        type: string
+      name: 
+        type: string
+  Station:
+    type: object
+    properties:
+      id: 
+        type: number
+      oid: 
+        type: string
+      region_id: 
+        type: number
+      code: 
+        type: string
+      sequence_number: 
+        type: string
+      altitude: 
+        type: string
+      longitude: 
+        type: number
+      latitude: 
+        type: number
+      note: 
+        type: string
+      nickname: 
+        type: string
+      registration_date: 
+        type: string
+      active: 
+        type: boolean
+  SystemConfiguration:
+    type: object
+    properties:
+      id: 
+        type: number
+      oid: 
+        type: string
+      parameter_name: 
+        type: string
+      parameter_value: 
+        type: string
+
