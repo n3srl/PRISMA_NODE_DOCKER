@@ -1,0 +1,4 @@
+FROM n3srl/orma-webmin
+
+RUN rm -rf /var/www/html/img/logo.png
+COPY ./logos/prisma.png /var/www/html/img/logo.png
