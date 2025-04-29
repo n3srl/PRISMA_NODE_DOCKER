@@ -6,12 +6,12 @@ node('docker') {
 			git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch:'main'
 		} 
 		stage('Build image') {
-		   dir("freeture14"){
+		   dir("freeture15"){
 				def buildArgs = ""
 				if (params.FORCE_REBUILD) {
 					buildArgs = "--no-cache"
 				}
-				dockerImage = docker.build("n3srl/freeture15_basler:latest", "${buildArgs} .")
+				dockerImage = docker.build("n3srl/freeture15_basler:latest", "-f DockerFile_basler ${buildArgs} .")
 		   }
 		}
 		
