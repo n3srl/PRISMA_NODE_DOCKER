@@ -47,6 +47,8 @@ RUN apt-get install -y --no-install-recommends \
 #install pylon SDK
 RUN git clone https://github.com/n3srl/PylonSDK.git /usr/local/PylonSDK
 WORKDIR /usr/local/PylonSDK
+RUN git lfs pull
+RUN rm -rf .git
 RUN tar -xvzf pylon-8.1.0_linux-x86_64_debs.tar.gz
 RUN apt-get install ./pylon_*.deb ./codemeter*.deb
 
