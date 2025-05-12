@@ -7,7 +7,7 @@ node('docker') {
 		} 
 		stage('Build image') {
 		   dir("freeture15"){
-				def buildArgs = ""
+				def buildArgs = "--progress=plain"
 				if (params.FORCE_REBUILD) {
 					buildArgs = "--no-cache"
 				}
