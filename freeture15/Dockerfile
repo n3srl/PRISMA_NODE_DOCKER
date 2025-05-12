@@ -1,6 +1,6 @@
 FROM ubuntu:jammy
 
-#ARG DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 #for Debian don't consider RUN and do the command, for WORKDIR = cd
 
 #downloads
@@ -130,19 +130,19 @@ run file /opt/arenasdk/ffmpeg/libavformat.so.58.12.100
 run file /opt/arenasdk/ffmpeg/libswresample.so.3.1.100
 
 #Get freeture
-RUN mkdir /usr/local/freeture-1.4.1
-RUN git clone --branch freeture14 https://github.com/n3srl/freeture.git /usr/local/freeture-1.4.1/freeture_git 
+RUN mkdir /usr/local/freeture-1.5.1
+RUN git clone --branch freeture15 https://github.com/n3srl/freeture.git /usr/local/freeture-1.5.1/freeture_git 
 
 
 #Build freeture
-WORKDIR /usr/local/freeture-1.4.1/freeture_git/cmake/
+WORKDIR /usr/local/freeture-1.5.1/freeture_git/cmake/
 RUN cmake . -DINCLUDE_LUCID=ON -DINCLUDE_PYLON=OFF
 RUN cat config.h
 RUN make 
 RUN make install
 
 #add default configuration files
-WORKDIR /usr/local/freeture-1.4.1/freeture_git/share/
+WORKDIR /usr/local/freeture-1.5.1/freeture_git/share/
 RUN ls
 RUN mkdir -p /usr/local/share/freeture/
 RUN cp configuration_PH032_PRODUCTION.cfg /usr/local/share/freeture/configuration.cfg
