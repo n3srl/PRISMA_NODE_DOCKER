@@ -30,8 +30,16 @@ function compute_du()
  du=${df_output: -3}
 }
 
+# Prima prova a liberare spazio cancellando solo 'stacks'
+/home/prisma/clean_disk_stacks.sh "$data_path" "$start_days" "$percentage"
+
 compute_du
- 
+
+if [[ $du -le $percentage ]]; then
+    echo "Disk usage is now within threshold after cleaning stacks. Exiting."
+    exit 0
+fi
+
 echo "Starting $0"
 echo "Disk usage: $du%"
 echo "Station code: $stationcode"

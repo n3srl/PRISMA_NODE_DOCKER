@@ -16,10 +16,16 @@
       args:
         executable: /bin/bash
         chdir: /prismadata/orma-src 
-        
-    - name: Fetch latest changes from the main branch
+    
+    - name: Clean untracked files
+      ansible.builtin.shell: git clean -fdx
+      args:
+        chdir: /prismadata/orma-src
+        executable: /bin/bash
+
+    - name: Fetch latest changes from all branches
       ansible.builtin.shell: |
-        git fetch
+        git fetch --all
       args:
         executable: /bin/bash
         chdir: /prismadata/orma-src 
