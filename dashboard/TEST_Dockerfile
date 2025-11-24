@@ -8,6 +8,8 @@ COPY data/prisma_dump.sql /db/dump.sql
 COPY scripts/init.sql /db/init.sql
 RUN chmod u+x /db/init.sql
 
+RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
+
 # Clone repository PRISMA_DAHSBOARD
 RUN rm -rf /app/* /app/.* 2>/dev/null || true && \
     git clone --branch test --single-branch  https://github.com/n3srl/PRISMA_DAHSBOARD.git /app
