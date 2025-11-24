@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  prisma-dashboard_test:
+    image: n3srl/prisma-dashboard:test
+    ports:
+      - "10111:80"
+    volumes:
+      - db_data_test:/var/lib/mysql
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"      
+        max-file: "3"
+
+volumes:
+  db_data_test:
+
