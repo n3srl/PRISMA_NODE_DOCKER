@@ -3,11 +3,8 @@ node('docker') {
 
 	try {
 		stage('Clone repository') {
-			git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch:'main'
-		} 
-		stage('Clone repository') {
 			dir("dashboard_src") {
-				git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_DASHBOARD.git', branch:'test'
+				git credentialsId: 'GitHub_SSH', url: 'https://github.com/n3srl/PRISMA_DASHBOARD.git', branch:'test'
 			}
 		} 
 		stage('Build image') {
