@@ -5,11 +5,11 @@ node('docker') {
 		stage('Clone repository') {
 			git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch:'main'
 		} 
-		stage('Clone dashboard') {
+		stage('Clone repository') {
 			dir("dashboard_src") {
-				git branch: 'test', url: 'https://github.com/n3srl/PRISMA_DAHSBOARD.git'
+				git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch:'test'
 			}
-		}
+		} 
 		stage('Build image') {
 		   dir("dashboard"){
 				def buildArgs = "--progress=plain"
