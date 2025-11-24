@@ -2,6 +2,10 @@ node('docker') {
     def dockerImage = null
 
 	try {
+		stage('Clone PRISMA NODE DOCKER repo') {
+			deleteDir()
+			git url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch: 'main'
+		}
 		stage('Clone PRISMA DASHBOARD repository from GitHub') {
 			dir('dashboard_src') {
 		        deleteDir()
