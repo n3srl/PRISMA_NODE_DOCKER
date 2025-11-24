@@ -2,6 +2,9 @@ node('docker') {
     def dockerImage = null
 
 	try {
+		stage('Cleanup workspace before build') {
+			deleteDir()
+		}
 		stage('Clone PRISMA DASHBOARD repository from GitHub') {
 			dir('dashboard_src') {
 		        deleteDir()
