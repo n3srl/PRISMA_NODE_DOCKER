@@ -1,4 +1,0 @@
-id,oid,username,password,email,title,first_name,middle_name,last_name,suffix,company,job_title,web_page_address,im_address,phone,address,postcode,number,city,province,country,timezone,created_by,modified_by,assigned,is_station_referer,is_administrator,erased,last_update
-1,NULL,admin,"$2b$12$9Ti8NhUXySmdib0Z86626enyXwa1Xascq46TIJ3vQkFpsWUnDtG3W",administrator@n-3.it,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,1,0,1,0,"2021-01-01 16:22:00"
-2,NULL,workspace_driver,"$2b$12$cyCCKu21z8j2GHgFEz3qe.SksSKxlY7f.qnZoTUEHfAwDmkaW2E42",administrator@n-3.it,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,1,0,1,0,"2021-01-01 16:22:00"
-3,NULL,andrea.novati,"$2b$12$Oq8rCj6tUD36RpNyqMO.reKfOYBXreTpMY6tjS.KvbfW8jpwKNH72",andrea.novati@n-3.it,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,1,1,1,0,0,"2021-01-01 18:22:00"

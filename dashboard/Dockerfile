@@ -7,8 +7,9 @@ ENV MYSQL_PRISMA_PWD=${MYSQL_PRISMA_PWD}
 COPY data/prisma_dump.sql /db/dump.sql
 COPY scripts/init.sql /db/init.sql
 RUN chmod u+x /db/init.sql
-# Initializing app
-COPY appdata /app
-RUN rm -rf /app/config/config.php
-COPY config/config.php /app/config/config.php 
+
+# Clone repository PRISMA_DAHSBOARD
+RUN rm -rf /app && \
+    git clone https://github.com/n3srl/PRISMA_DAHSBOARD.git /app
+
 CMD ["/run.sh"]
