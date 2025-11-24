@@ -13,13 +13,16 @@ node('docker') {
 			}
 		}
 		stage('Build image') {
-		   dir("dashboard"){
+		   dir("dashboard")
+		   {
 				def tag = "test-${env.BUILD_NUMBER}"
 				def buildArgs = "--progress=plain --pull=true"
 				
 				if (params.FORCE_REBUILD) {
 					buildArgs = " --no-cache"
 				}
+				
+				echo "Build arguments: ${buildArgs}"
 				
 				dockerImage = docker.build("n3srl/prisma-dashboard:${tag}", "${buildArgs} .")
 		   }
