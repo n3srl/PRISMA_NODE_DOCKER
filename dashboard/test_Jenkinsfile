@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'GIT_BRANCH', defaultValue: 'Test', description: 'Branch del repository da deployare')
+        string(name: 'SSH_HOST', defaultValue: '192.168.1.100', description: 'Indirizzo del server remoto')
+        string(name: 'SSH_USER', defaultValue: 'www-data', description: 'Utente SSH per il deploy')
+        string(name: 'REMOTE_PATH', defaultValue: '/var/www/html', description: 'Percorso remoto dove copiare i file')
+        choice(name: 'SSH_CREDENTIALS', choices: ['SSH_WEB_SERVER'], description: 'Credenziali SSH registrate in Jenkins')
+    }
+
+    environment {
+        REPO_URL = "https://github.com/n3srl/PRISMA_DAHSBOARD.git"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "Clonazione del branch ${params.GIT_BRANCH}"
+                git branch: "${params.GIT_BRANCH}", url: "${env.REPO_URL}"
+            }
+        }
+
+        stage('Deploy via SSH') {
+            steps {
+                sshagent(credentials: [params.SSH_CREDENTIALS]) {
+                    sh """
+                        echo "Deploy verso ${params.SSH_HOST} nella cartella ${params.REMOTE_PATH}"
+
+                        # Copia con rsync (veloce, cancella i file rimossi, mantiene i permessi)
+                        rsync -avz --delete ./ ${params.SSH_USER}@${params.SSH_HOST}:${params.REMOTE_PATH}
+
+                        # Imposta proprietario e gruppo
+                        ssh ${params.SSH_USER}@${params.SSH_HOST} "sudo chown -R www-data:www-data ${params.REMOTE_PATH}"
+                    """
+                }
+            }
+        }
+    }
+}
