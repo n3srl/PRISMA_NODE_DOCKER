@@ -5,13 +5,18 @@ node('docker') {
 		stage('Clone repository') {
 			git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch:'main'
 		} 
+		stage('Clone dashboard') {
+			dir("dashboard_src") {
+				git branch: 'test', url: 'https://github.com/n3srl/PRISMA_DAHSBOARD.git'
+			}
+		}
 		stage('Build image') {
 		   dir("dashboard"){
 				def buildArgs = "--progress=plain"
 				if (params.FORCE_REBUILD) {
 					buildArgs = "--no-cache"
 				}
-				dockerImage = docker.build("n3srl/prisma-dashboard:test", "${buildArgs} -f TEST_Dockerfile .")
+				dockerImage = docker.build("n3srl/prisma-dashboard:test", "${buildArgs} .")
 		   }
 		}
 		

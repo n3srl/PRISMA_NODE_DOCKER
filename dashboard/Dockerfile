@@ -8,8 +8,8 @@ COPY data/prisma_dump.sql /db/dump.sql
 COPY scripts/init.sql /db/init.sql
 RUN chmod u+x /db/init.sql
 
-# Clone repository PRISMA_DAHSBOARD
+# Copy repository PRISMA_DAHSBOARD
 RUN rm -rf /app && \
-    git clone https://github.com/n3srl/PRISMA_DAHSBOARD.git /app
-
+COPY dashboard_src /app
+ 
 CMD ["/run.sh"]
