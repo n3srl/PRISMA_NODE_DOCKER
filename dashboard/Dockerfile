@@ -9,6 +9,6 @@ COPY scripts/init.sql /db/init.sql
 RUN chmod u+x /db/init.sql
 
 # Copy repository PRISMA_DAHSBOARD
-COPY dashboard_src/ /app/
+COPY PRISMA_DASHBOARD/ /app/
 
 CMD ["/run.sh"]
