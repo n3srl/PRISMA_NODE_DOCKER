@@ -19,7 +19,7 @@ node('docker') {
 				def buildArgs = "--progress=plain --pull=true"
 				
 				if (params.FORCE_REBUILD) {
-					buildArgs = " --no-cache"
+					buildArgs += " --no-cache"
 				}
 				
 				echo "Build arguments: ${buildArgs}"
