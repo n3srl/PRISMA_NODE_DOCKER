@@ -5,7 +5,7 @@ node('docker') {
 		stage('Clone PRISMA DASHBOARD repository from GitHub') {
 			dir('dashboard_src') {
 		        deleteDir()
-				sshagent(credentials: ['GitHub_SSH']) {
+				sshagent(credentials: ['novatia']) {
 					sh """
 						git clone --branch test git@github.com:n3srl/PRISMA_DASHBOARD.git 
 					"""
