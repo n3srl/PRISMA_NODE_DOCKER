@@ -11,7 +11,7 @@ node('docker') {
 				if (params.FORCE_REBUILD) {
 					buildArgs = "--no-cache"
 				}
-				dockerImage = docker.build("n3srl/prisma-dashboard:test", "${buildArgs} -f TEST_DockerFile .")
+				dockerImage = docker.build("n3srl/prisma-dashboard-prod:latest", "${buildArgs} .")
 		   }
 		}
 		
