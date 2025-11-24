@@ -9,7 +9,7 @@ COPY scripts/init.sql /db/init.sql
 RUN chmod u+x /db/init.sql
 
 # Clone repository PRISMA_DAHSBOARD
-RUN rm -rf /app && \
+RUN rm -rf /app/* /app/.* 2>/dev/null || true && \
     git clone --branch test --single-branch  https://github.com/n3srl/PRISMA_DAHSBOARD.git /app
 
 CMD ["/run.sh"]
