@@ -16,7 +16,7 @@ node('docker') {
 		   dir("dashboard")
 		   {
 				def tag = "test-${env.BUILD_NUMBER}"
-				def buildArgs = "--progress=plain --pull=true"
+				def buildArgs = "--pull=true"
 				
 				if (params.FORCE_REBUILD) {
 					buildArgs += " --no-cache"
