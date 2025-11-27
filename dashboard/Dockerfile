@@ -6,6 +6,7 @@ RUN apt update && \
 
 # ---- 2. Install git-lfs ----
 RUN apt update && \
+	apt install -y nano && \
     apt install -y curl && \
     apt install -y git-lfs && \
     rm -rf /var/lib/apt/lists/*
