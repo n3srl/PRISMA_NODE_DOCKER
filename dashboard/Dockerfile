@@ -1,4 +1,15 @@
 FROM n3srl/docker-lamp
+# ---- 1. Install git ----
+RUN apt update && \
+    apt install -y git && \
+    rm -rf /var/lib/apt/lists/*
+
+# ---- 2. Install git-lfs ----
+RUN apt update && \
+    apt install -y curl && \
+    apt install -y git-lfs && \
+    rm -rf /var/lib/apt/lists/*
+
 # env
 ARG MYSQL_PRISMA_PWD
 # build env
