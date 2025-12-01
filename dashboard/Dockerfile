@@ -1,18 +1,18 @@
 FROM n3srl/docker-lamp
 # ---- 1. Install git ----
-RUN apt update && \
+RUN apt update --allow-releaseinfo-change&& \
     apt install -y git && \
     rm -rf /var/lib/apt/lists/*
 
 # ---- 2. Install git-lfs ----
-RUN apt update && \
+RUN apt update --allow-releaseinfo-change && \
 	apt install -y nano && \
     apt install -y curl && \
     apt install -y git-lfs && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Python
-RUN apt update && \
+RUN apt update --allow-releaseinfo-change&& \
     apt install -y python3 python3-pip && \
     rm -rf /var/lib/apt/lists/*
 
