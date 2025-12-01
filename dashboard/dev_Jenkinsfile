@@ -18,7 +18,7 @@ node('docker') {
 		stage('Build image') {
 		   dir("dashboard")
 		   {
-				def tag = "latest"
+				def tag = "dev-${env.BUILD_NUMBER}"
 				def buildArgs = "--pull=true"
 				
 				if (params.FORCE_REBUILD) {
