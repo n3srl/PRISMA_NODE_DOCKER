@@ -11,10 +11,11 @@ RUN apt update && \
     apt install -y git-lfs && \
     rm -rf /var/lib/apt/lists/*
 
-# env
-ARG MYSQL_PRISMA_PWD
-# build env
-ENV MYSQL_PRISMA_PWD=${MYSQL_PRISMA_PWD}
+# Install Python
+RUN apt update && \
+    apt install -y python3 python3-pip && \
+    rm -rf /var/lib/apt/lists/*
+
 # Inizializing database
 COPY data/prisma_dump.sql /db/dump.sql
 COPY scripts/init.sql /db/init.sql
