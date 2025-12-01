@@ -27,7 +27,7 @@ node('docker') {
 				
 				echo "Build arguments: ${buildArgs}"
 				
-				dockerImage = docker.build("n3srl/prisma-dashboard-dev:${tag}", "${buildArgs} .")
+				dockerImage = docker.build("n3srl/prisma-dashboard:${tag}", "${buildArgs} .")
 		   }
 		}
 		
