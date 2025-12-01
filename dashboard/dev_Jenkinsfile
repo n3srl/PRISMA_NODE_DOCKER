@@ -2,21 +2,32 @@ node('docker') {
     def dockerImage = null
 
 	try {
-		stage('Clone repository') {
-			git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch:'main'
-		} 
-		stage('Clone dashboard') {
-			dir("dashboard_src") {
-				git branch: 'dev', url: 'https://github.com/n3srl/PRISMA_DAHSBOARD.git'
+		stage('Clone PRISMA NODE DOCKER repo') {
+			deleteDir()
+			git url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch: 'main'
+		}
+		stage('Clone PRISMA DASHBOARD repository from GitHub') {
+			dir('dashboard') {
+				sshagent(credentials: ['GitHub_SSH']) {
+					sh """
+						git clone --branch dev git@github.com:n3srl/PRISMA_DASHBOARD.git 
+					"""
+				}
 			}
 		}
 		stage('Build image') {
-		   dir("dashboard"){
-				def buildArgs = "--progress=plain"
+		   dir("dashboard")
+		   {
+				def tag = "latest"
+				def buildArgs = "--pull=true"
+				
 				if (params.FORCE_REBUILD) {
-					buildArgs = "--no-cache"
+					buildArgs += " --no-cache"
 				}
-				dockerImage = docker.build("n3srl/prisma-dashboard-dev:latest", "${buildArgs} .")
+				
+				echo "Build arguments: ${buildArgs}"
+				
+				dockerImage = docker.build("n3srl/prisma-dashboard-dev:${tag}", "${buildArgs} .")
 		   }
 		}
 		
