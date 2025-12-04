@@ -27,6 +27,8 @@ RUN systemctl status openvpn || echo 'suppress errors'
 #install ansible
 RUN apt-get -y install ansible sshpass
 
+RUN pip3 install --no-cache-dir paramiko pymysql requests python-dotenv
+
 RUN echo "test"
 #clear space
 RUN rm -rf /var/lib/apt/lists/* && apt-get clean && apt-get autoremove -y
