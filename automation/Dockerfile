@@ -18,7 +18,7 @@ RUN apt-get update && \
     apt-get install -y python3 python3-pip python3-dev python3-pymysql && \
     pip3 install --upgrade pip
 
-RUN pip3 install --no-cache-dir paramiko pymysql requests python-dotenv
+RUN pip3 install --no-cache-dir paramiko pymysql requests python-dotenv mysql-connector-python
 
 #install openvpn
 RUN apt-get -y install systemctl openvpn sudo nano
