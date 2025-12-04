@@ -16,6 +16,8 @@ RUN echo $TZ > /etc/timezone && \
 
 #install openvpn
 RUN apt-get -y install systemctl openvpn sudo nano
+RUN apt-get -y install iputils-ping
+RUN apt-get -y install python3-pymysql
 
 RUN systemctl enable --now openvpn
 RUN systemctl daemon-reload
