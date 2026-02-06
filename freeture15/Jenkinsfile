@@ -6,7 +6,7 @@ node('docker') {
 			git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch:'main'
 		} 
 		stage('Build image') {
-			sshagent(credentials: ['novatia']) {
+			sshagent(credentials: ['GitHub_SSH']) {
 			   dir("freeture15"){
 					def buildArgs = "--progress=plain"
 					if (params.FORCE_REBUILD) {
