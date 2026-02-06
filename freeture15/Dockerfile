@@ -131,8 +131,10 @@ run file /opt/arenasdk/ffmpeg/libswresample.so.3.1.100
 
 #Get freeture
 RUN mkdir /usr/local/freeture-1.5.1
-RUN git clone --branch freeture15 https://github.com/n3srl/freeture.git /usr/local/freeture-1.5.1/freeture_git 
 
+#                RUN git clone --branch freeture15 https://github.com/n3srl/freeture.git /usr/local/freeture-1.5.1/freeture_git 
+# Get freeture (PRIVATE REPO)
+RUN --mount=type=ssh git clone --branch freeture15 git@github.com:n3srl/freeture.git /usr/local/freeture-1.5.1/freeture_git
 
 #Build freeture
 WORKDIR /usr/local/freeture-1.5.1/freeture_git/cmake/
