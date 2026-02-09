@@ -134,6 +134,7 @@ RUN mkdir /usr/local/freeture-1.5.1
 
 # Prepare SSH known_hosts for GitHub
 RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh && ssh-keyscan github.com >> /root/.ssh/known_hosts
+RUN --mount=type=ssh ssh -vvvT git@github.com || true
 
 #                RUN git clone --branch freeture15 https://github.com/n3srl/freeture.git /usr/local/freeture-1.5.1/freeture_git 
 # Get freeture (PRIVATE REPO)
