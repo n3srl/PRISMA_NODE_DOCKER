@@ -7,16 +7,23 @@ node('docker') {
 		} 
 		stage('Build image') {
 			sshagent(credentials: ['GitHub_SSH']) {
-			   dir("freeture15"){
+				dir("freeture15") {
+
 					def buildArgs = "--progress=plain"
 					if (params.FORCE_REBUILD) {
-						buildArgs = "--no-cache"
+						buildArgs += " --no-cache"
 					}
-					dockerImage = docker.build("n3srl/freeture15:latest", "${buildArgs} .")
-			   }
+
+					sh """
+						export DOCKER_BUILDKIT=1
+						docker build \
+						  ${buildArgs} \
+						  --ssh default \
+						  -t n3srl/freeture15:latest .
+					"""
+				}
 			}
 		}
-		
 		stage('Push image') {
 			withDockerRegistry([ credentialsId: "n3_docker_hub", url: "" ]) {
 				dockerImage.push()
