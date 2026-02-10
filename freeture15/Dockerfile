@@ -155,6 +155,7 @@ WORKDIR /usr/local/freeture-1.5.1/freeture_git/share/
 RUN ls
 RUN mkdir -p /usr/local/share/freeture/
 RUN cp configuration_PH032_PRODUCTION.cfg /usr/local/share/freeture/configuration.cfg
+RUN cp default_PH032.bmp /usr/local/share/freeture/default.bmp
 
 
 #clear space
