@@ -6,18 +6,29 @@ node('docker') {
 			git credentialsId: 'novatia', url: 'https://github.com/n3srl/PRISMA_NODE_DOCKER.git', branch:'main'
 		} 
 		stage('Build image') {
-		   dir("freeture15"){
-				def buildArgs = ""
-				if (params.FORCE_REBUILD) {
-					buildArgs = "--no-cache"
+			sshagent(credentials: ['GitHub_SSH']) {
+				dir("freeture15") {
+
+					def buildArgs = "--progress=plain"
+					if (params.FORCE_REBUILD) {
+						buildArgs += " --no-cache"
+					}
+
+					sh """
+						export DOCKER_BUILDKIT=1
+						docker build \
+						  ${buildArgs} \
+						  --ssh default \
+						  -t n3srl/freeture15_basler:latest .
+					"""
 				}
-				dockerImage = docker.build("n3srl/freeture15_basler:latest", "-f Dockerfile_basler ${buildArgs} .")
-		   }
+			}
 		}
-		
 		stage('Push image') {
 			withDockerRegistry([ credentialsId: "n3_docker_hub", url: "" ]) {
-				dockerImage.push()
+				sh """
+					docker push n3srl/freeture15_basler:latest
+				"""
 			}
 		}
 		
