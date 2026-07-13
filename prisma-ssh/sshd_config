@@ -24,7 +24,6 @@ PrintMotd no
 Subsystem sftp internal-sftp
 
 Match User prisma
-    ChrootDirectory /chroot
-    ForceCommand internal-sftp -d /prismadata
+    ForceCommand internal-sftp -d /prismadata/data_share
     AllowTcpForwarding no
     X11Forwarding no

@@ -3,9 +3,7 @@ FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y --no-install-recommends \
         openssh-server \
     && rm -rf /var/lib/apt/lists/* \
-    && mkdir -p /run/sshd /chroot/prismadata \
-    && chown root:root /chroot \
-    && chmod 755 /chroot \
+    && mkdir -p /run/sshd /prismadata \
     && useradd -m -s /bin/bash -p '*' prisma
 
 COPY sshd_config /etc/ssh/sshd_config

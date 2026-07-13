@@ -16,8 +16,8 @@ services:
         source: orma-keys
         target: /keys/
       - type: bind
-        source: /prismadata/data_share
-        target: /chroot/prismadata
+        source: /prismadata
+        target: /prismadata
         read_only: true
 
 volumes:
