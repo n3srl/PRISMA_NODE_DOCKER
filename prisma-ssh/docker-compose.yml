@@ -17,7 +17,7 @@ services:
         target: /keys/
       - type: volume
         source: freeture-data
-        target: /prismadata/
+        target: /chroot/prismadata/
 
 volumes:
   orma-keys:
