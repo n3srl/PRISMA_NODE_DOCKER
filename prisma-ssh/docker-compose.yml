@@ -15,12 +15,11 @@ services:
       - type: volume
         source: orma-keys
         target: /keys/
-      - type: volume
-        source: freeture-data
-        target: /chroot/prismadata/
+      - type: bind
+        source: /prismadata
+        target: /chroot/prismadata
+        read_only: true
 
 volumes:
   orma-keys:
-    external: true
-  freeture-data:
     external: true
