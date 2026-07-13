@@ -15,8 +15,14 @@ ChallengeResponseAuthentication no
 UsePAM no
 PubkeyAuthentication yes
 
+StrictModes no
+
 X11Forwarding no
 PrintMotd no
 
-AcceptEnv LANG LC_*
-Subsystem sftp /usr/lib/openssh/sftp-server
+Subsystem sftp internal-sftp
+
+Match User prisma
+    ForceCommand internal-sftp
+    AllowTcpForwarding no
+    X11Forwarding no
