@@ -15,6 +15,7 @@ ChallengeResponseAuthentication no
 UsePAM no
 PubkeyAuthentication yes
 
+LogLevel VERBOSE
 StrictModes no
 
 X11Forwarding no

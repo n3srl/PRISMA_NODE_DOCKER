@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         openssh-server \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /run/sshd \
-    && useradd -m -s /bin/bash prisma
+    && useradd -m -s /bin/bash -p '*' prisma
 
 COPY sshd_config /etc/ssh/sshd_config
 
